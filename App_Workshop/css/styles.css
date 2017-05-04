@@ -44,14 +44,14 @@ body {
 
 .header-button {
     position: absolute;
-    top: 6;
+    top: 6px;
     padding: 7px 5px;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     line-height: 1em;
 }
 
 .header-button-left {
-    left: 4;
+    left: 4px;
 }
 
 .search-bar {
@@ -113,7 +113,7 @@ li {
     padding: 0;
     display: -webkit-box;
     display: -moz-box;
-    display: box;
+    display: flex; /*original: box --> from a older version*/
     width: 100%;
 }
 
@@ -147,8 +147,9 @@ li>a * {
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
-	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+    background-image: -moz-linear-gradient(#ededed 5%, #dfdfdf 100%);
+    background-position: center top;
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
 	background-color:#ededed;
 	-moz-border-radius:2px;
 	-webkit-border-radius:2px;
@@ -163,7 +164,8 @@ li>a * {
 
 .button:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
-	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	background:-moz-linear-gradient(#dfdfdf 5%, #ededed 100% );
+    background-position: center top;
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
 	background-color:#dfdfdf;
 
@@ -171,7 +173,7 @@ li>a * {
 
 h1 {
     font-size: 18px;
-    padding: 20 0 0 0;
+    padding: 20px 0px 0px 0px;
     margin: 0px;
 }
 
@@ -187,4 +189,14 @@ h2 {
     margin:10px;
     width:100px;
     height:100px;
+}
+
+.scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    position: absolute;
+    top: 84px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
 }
