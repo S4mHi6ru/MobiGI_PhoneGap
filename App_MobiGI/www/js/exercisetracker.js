@@ -46,7 +46,7 @@ $("#startTracking_start").live('click', function(){
             tracking_data.push(position);
             var lat = position.coords.latitude;
             var lng = position.coords.longitude;
-            $("#position_info").html("Your current Position is: " + "<br>" + "lat : " + lat + " lng : " + lng);
+            $("#position_info").html("Your current Position is: " + "<br>" + "lat : " + lat + " lng : " + lng + "<br>" + tracking_data);
         },
 
         // Error
@@ -134,7 +134,7 @@ $('#track_info').live('pageshow', function(){
         data = JSON.parse(data);
     }
     catch (err){
-        alert("unable to parse json.")
+        alert("unable to parse json." + "<br>" + data)
         data = [{"timestamp": 1494366039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53343424644297, "longitude": 7.647811924831444}},{"timestamp": 1494376039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53320514562638, "longitude": 7.647614359555965}}]
     }
 
