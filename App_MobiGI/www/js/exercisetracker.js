@@ -137,6 +137,18 @@ $('#track_info').live('pageshow', function(){
 
     total_km_rounded = total_km.toFixed(2);
 
+    // Calculate the total time taken for the track
+    start_time = new Date(data[0].timestamp).getTime();
+    end_time = new Date(data[data.length-1].timestamp).getTime();
+
+    total_time_ms = end_time - start_time;
+    total_time_s = total_time_ms / 1000;
+
+    final_time_ms = Math.floor(total_time_s / 1000);
+    final_time_s = total_time_s - (final_time_m * 60);
+
+    // Display total distance and time
+    $("#track_info_info").html('Travelled <strong>' + total_km_rounded + '</strong> km in <strong>' + final_time_m + 'm/strong> and <strong>' + final_time_s + 's</strong>');
 });
 
 
