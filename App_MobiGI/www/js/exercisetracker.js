@@ -2,6 +2,26 @@
  * Created by S4m on 09.05.2017.
  */
 
+// Calculating Distance of the Workout
+function gps_distance(lat1, lon1, lat2, lon2){
+    // http://www.movable-type.co.uk/scripts/latlong.html
+    var R = 6371; // km
+    var dLat = (lat2-lat1) * (Math.PI / 180);
+    var dLon = (lon2-lon1) * (Math.PI / 180);
+    var lat1 = lat1 * (Math.PI / 180);
+    var lat2 = lat2 * (Math.PI / 180);
+
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var d = R * c;
+
+    return d;
+}
+
+
+// code from : https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-persistence-graphing--mobile-11074
+
 document.addEventListener("deviceready", function(){
 
     if(navigator.network.connection.type == Connection.NONE){
@@ -83,3 +103,40 @@ $('#history').live('pageshow', function(){
     // Tell jQueryMobile to refresh the list
     $("#history_tracklist").listview('refresh');
 });
+
+// When the user clicks a link to view track info, set/change the track_id attribute on the track_info page
+$("#history_tracklist li a").live('click', function(){
+    $("#track_info").attr("track_id", $(this).text());
+});
+
+// When the user views the Track Info page
+$('#track_info').live('pageshow', function(){
+    // Find the track_id of the workout they are viewing
+    var key = $(this).attr("track_id");
+
+    // Update the Track Info page header to the track_id
+    $("#track_info div[data-role=header] h1").text(key);
+
+    // Get all the GPS data for the specific workout
+    var data = window.localStorage.getItem(key);
+
+    // Turn the stringified GPS data back into a JS object
+    data = JSON.parse(data);
+
+    // Calculate the total distance travelled
+    total_km = 0;
+
+    for(i=0; i<data.length; i++){
+
+        if(i==(data.length-1)){
+            break;
+        }
+
+        total_km += gps_distance(data[i].coords.latitude, data[i].coords.longitude, data[i+1].latitude, data[i+1].coords.longitude);
+    }
+
+    total_km_rounded = total_km.toFixed(2);
+
+});
+
+
