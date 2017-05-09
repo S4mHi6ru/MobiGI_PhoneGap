@@ -64,18 +64,18 @@ $("#startTracking_start").live('click', function(){
 
 $("#startTracking_stop").live('click', function(){
     // Stop tracking the user
-    navigator.geolocation.clearWatch(wath_id);
+    navigator.geolocation.clearWatch(watch_id);
 
     // Save the tracking data
-    window.localStorage.setItem(track_i, JSON.stringify(tracking_data));
+    window.localStorage.setItem(track_id, JSON.stringify(tracking_data));
 
     // Reset watch_id and tracking_data
     var watch_id = null;
     var tracking_data = null;
 
     // Tidy up the UI
-    $("trak_id").val("").show();
-    $("#startTracking_status").html("Stopped tracking workout: <strong>" + track_id + "</srong>");
+    $("#track_id").val("").show();
+    $("#startTracking_status").html("Stopped tracking workout: <strong>" + track_id + "</strong>");
 });
 
 $("#home_clearstorage_button").live('click',function(){
@@ -89,8 +89,8 @@ $("#home_seedgps_button").live('click', function(){
 // When the user views the history page
 $('#history').live('pageshow', function(){
     // Count the number of entries in localStorage and display this information to the user
-    tracks_recorded = window.localStorage.lenth;
-    $("#tracks_recordet").html("<strong>" + tracks_recorded + "</strong> workout(s) recorded");
+    tracks_recorded = window.localStorage.length;
+    $("#tracks_recorded").html("<strong>" + tracks_recorded + "</strong> workout(s) recorded");
 
     // Empty the list of recorded tracks
     $("#history_tracklist").empty();
@@ -132,7 +132,7 @@ $('#track_info').live('pageshow', function(){
             break;
         }
 
-        total_km += gps_distance(data[i].coords.latitude, data[i].coords.longitude, data[i+1].latitude, data[i+1].coords.longitude);
+        total_km += gps_distance(data[i].coords.latitude, data[i].coords.longitude, data[i+1].coords.latitude, data[i+1].coords.longitude);
     }
 
     total_km_rounded = total_km.toFixed(2);
@@ -144,11 +144,11 @@ $('#track_info').live('pageshow', function(){
     total_time_ms = end_time - start_time;
     total_time_s = total_time_ms / 1000;
 
-    final_time_ms = Math.floor(total_time_s / 1000);
+    final_time_m = Math.floor(total_time_s / 60);
     final_time_s = total_time_s - (final_time_m * 60);
 
     // Display total distance and time
-    $("#track_info_info").html('Travelled <strong>' + total_km_rounded + '</strong> km in <strong>' + final_time_m + 'm/strong> and <strong>' + final_time_s + 's</strong>');
+    $("#track_info_info").html('Travelled <strong>' + total_km_rounded + '</strong> km in <strong>' + final_time_m + 'm</strong> and <strong>' + final_time_s + 's</strong>');
 
     // Plotting the Route on the Google Map
     // Set the initial Lat and Long of the Google Map
@@ -158,11 +158,11 @@ $('#track_info').live('pageshow', function(){
     var myOptions = {
         zoom: 15,
         center: myLatLng,
-        mapTypeID: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
     // Create the Google Map, set options
-    var map = new google.maps.Map(document.getElementByD("map_cavas"), myOptions);
+    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
     var trackCoords = [];
 
