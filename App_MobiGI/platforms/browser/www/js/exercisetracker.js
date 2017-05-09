@@ -149,6 +149,38 @@ $('#track_info').live('pageshow', function(){
 
     // Display total distance and time
     $("#track_info_info").html('Travelled <strong>' + total_km_rounded + '</strong> km in <strong>' + final_time_m + 'm/strong> and <strong>' + final_time_s + 's</strong>');
+
+    // Plotting the Route on the Google Map
+    // Set the initial Lat and Long of the Google Map
+    var myLatLng = new google.maps.LatLng(data[0].coords.latitude, data[0].coords.longitude);
+
+    // Google Map Options
+    var myOptions = {
+        zoom: 15,
+        center: myLatLng,
+        mapTypeID: google.maps.MapTypeId.ROADMAP
+    };
+
+    // Create the Google Map, set options
+    var map = new google.maps.Map(document.getElementByD("map_cavas"), myOptions);
+
+    var trackCoords = [];
+
+    //Add each GPS entry to an array
+    for(i=0; i<data.length; i++){
+        trackCoords.push(new google.maps.LatLng(data[i].coords.latitude, data[i].coords.longitude));
+    }
+
+    // Plot the GPS entries as a line on the Google Map
+    var trackPath = new google.maps.Polyline({
+        path: trackCoords,
+        strokeColor: "#FF0000",
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+    });
+
+    // Apply the line to the map
+    trackPath.setMap(map);
 });
 
 
