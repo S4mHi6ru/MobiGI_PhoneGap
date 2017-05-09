@@ -42,14 +42,19 @@ $("#startTracking_start").live('click', function(){
     watch_id = navigator.geolocation.watchPosition(
 
         // Success
-        function(position){
+        function (position){
             tracking_data.push(position);
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            $("#position_info").html("Your current Position is: " + "<br>" + "lat : " + lat + " lng : " + lng);
         },
 
         // Error
-        function(error){
+        function (error){
             console.log(error);
+            alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
         },
+
 
         // Settings
         { frequency: 3000, enableHighAccuracy: true });

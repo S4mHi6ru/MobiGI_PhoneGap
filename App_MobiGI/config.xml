@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.mobigl" version="1.0.0" xmlns="http://www.w3.org/ns/widgets">
+<widget id="com.phonegap.mobigl" version="17.05.10.2" xmlns="http://www.w3.org/ns/widgets">
     <name>MobiGI</name>
     <description>
         Mit der in der LBS Vorlesung vorgestellten Entwicklungsumgebung PhoneGap soll eine App erstellt werden die Sensordaten des mobilen Gerätes (wie GPS, Schrittzähler, Accelerometer) als Service im Hintergrund (mit Focus auf Android) sammelt und dem Benutzer ermöglicht die Aktivitäten wie zum Beispiel Gehen, Arbeiten, Fahrradfahren, Einsteigen in der App zu annotieren. Als zusätzliche Funktion sollte die erstellte App ermöglichen den Datensatz mit den Sensordaten und den Aktivitäten als .csv zu exportieren. Zusätzlich, bei genügender Zeit könnte ein Demodatensatz erstellt und in R visualisiert werden.
