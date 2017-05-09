@@ -73,6 +73,8 @@ $("#startTracking_stop").live('click', function(){
 
     // Save the tracking data
     window.localStorage.setItem(track_id, JSON.stringify(tracking_data));
+    $("#position_info").html("Your current Position is: " + "<br>" + tracking_data);
+
 
     // Reset watch_id and tracking_data
     var watch_id = null;
@@ -81,6 +83,7 @@ $("#startTracking_stop").live('click', function(){
     // Tidy up the UI
     $("#track_id").val("").show();
     $("#startTracking_status").html("Stopped tracking workout: <strong>" + track_id + "</strong>");
+    $("#position_info").html("");
 });
 
 $("#home_clearstorage_button").live('click',function(){
@@ -127,7 +130,13 @@ $('#track_info').live('pageshow', function(){
     var data = window.localStorage.getItem(key);
 
     // Turn the stringified GPS data back into a JS object
-    data = JSON.parse(data);
+    try{
+        data = JSON.parse(data);
+    }
+    catch (err){
+        alert("unable to parse json.")
+        data = [{"timestamp": 1494366039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53343424644297, "longitude": 7.647811924831444}},{"timestamp": 1494376039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53320514562638, "longitude": 7.647614359555965}}]
+    }
 
     // Calculate the total distance travelled
     total_km = 0;
@@ -157,7 +166,13 @@ $('#track_info').live('pageshow', function(){
 
     // Plotting the Route on the Google Map
     // Set the initial Lat and Long of the Google Map
-    var myLatLng = new google.maps.LatLng(data[0].coords.latitude, data[0].coords.longitude);
+    try{
+        var myLatLng = new google.maps.LatLng(data[0].coords.latitude, data[0].coords.longitude);
+
+    }
+    catch (err){
+        alert("something is worng. :(")
+    }
 
     // Google Map Options
     var myOptions = {
