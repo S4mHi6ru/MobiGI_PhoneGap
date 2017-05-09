@@ -84,6 +84,7 @@ $("#home_clearstorage_button").live('click',function(){
 
 $("#home_seedgps_button").live('click', function(){
     window.localStorage.setItem('Sample block', '[{"timestamp":1335700802000,"coords":{"heading":null,"altitude":null,"longitude":170.33488333333335,"accuracy":0,"latitude":-45.87475166666666,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700803000,"coords":{"heading":null,"altitude":null,"longitude":170.33481666666665,"accuracy":0,"latitude":-45.87465,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700804000,"coords":{"heading":null,"altitude":null,"longitude":170.33426999999998,"accuracy":0,"latitude":-45.873708333333326,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700805000,"coords":{"heading":null,"altitude":null,"longitude":170.33318333333335,"accuracy":0,"latitude":-45.87178333333333,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700806000,"coords":{"heading":null,"altitude":null,"longitude":170.33416166666666,"accuracy":0,"latitude":-45.871478333333336,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700807000,"coords":{"heading":null,"altitude":null,"longitude":170.33526833333332,"accuracy":0,"latitude":-45.873394999999995,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700808000,"coords":{"heading":null,"altitude":null,"longitude":170.33427333333336,"accuracy":0,"latitude":-45.873711666666665,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700809000,"coords":{"heading":null,"altitude":null,"longitude":170.33488333333335,"accuracy":0,"latitude":-45.87475166666666,"speed":null,"altitudeAccuracy":null}}]');
+    window.localStorage.setItem('Sample Muttenz', '[{"timestamp": 1494366039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53343424644297, "longitude": 7.647811924831444}},{"timestamp": 1494376039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53320514562638, "longitude": 7.647614359555965}},{"timestamp": 1494386039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53299336200655, "longitude": 7.647445342000614}},{"timestamp": 1494396039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53314657284183, "longitude": 7.646490248556102}},{"timestamp": 1494406039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53367138793076, "longitude": 7.643951310510298}},{"timestamp": 1494416039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53406042600069, "longitude": 7.642599268547949}},{"timestamp": 1494426039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53397150778124, "longitude": 7.642489930718918}},{"timestamp": 1494436039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53392032330245, "longitude": 7.642182859385558}},{"timestamp": 1494446039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53402336934874, "longitude": 7.64126753261418}},{"timestamp": 1494456039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53435210076379, "longitude": 7.639281311688029}},{"timestamp": 1494466039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53416699067378, "longitude": 7.639221464495107}},{"timestamp": 1494476039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53412290498257, "longitude": 7.638953991973576}},{"timestamp": 1494486039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53351401829625, "longitude": 7.638747717871397}},{"timestamp": 1494496039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.5335293159634, "longitude": 7.638640434117157}},{"timestamp": 1494506039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53365059205396, "longitude": 7.638598149881323}}]')
 });
 
 // When the user views the history page
@@ -97,7 +98,7 @@ $('#history').live('pageshow', function(){
 
     // Iterate over all of the recorded tracks, populating the list
     for(i=0; i<tracks_recorded; i++){
-        $("#history_tracklist").append("<li><a href='#track_info'data-ajax='false'>" + window.localStorage.key(i) +"</a></li>");
+        $("#history_tracklist").append("<li><a href='#track_info' data-ajax='false'>" + window.localStorage.key(i) +"</a></li>");
     }
 
     // Tell jQueryMobile to refresh the list
@@ -128,7 +129,7 @@ $('#track_info').live('pageshow', function(){
 
     for(i=0; i<data.length; i++){
 
-        if(i==(data.length-1)){
+        if(i == (data.length-1)){
             break;
         }
 
@@ -142,13 +143,12 @@ $('#track_info').live('pageshow', function(){
     end_time = new Date(data[data.length-1].timestamp).getTime();
 
     total_time_ms = end_time - start_time;
-    total_time_s = total_time_ms / 1000;
+    total_time_s = Math.floor(total_time_ms / 1000);
 
     final_time_m = Math.floor(total_time_s / 60);
     final_time_s = total_time_s - (final_time_m * 60);
 
-    // Display total distance and time
-    $("#track_info_info").html('Travelled <strong>' + total_km_rounded + '</strong> km in <strong>' + final_time_m + 'm</strong> and <strong>' + final_time_s + 's</strong>');
+    $("#track_info_info").html('Travelled <strong>' + total_km_rounded + ' km </strong> in <strong>' + final_time_m + ' m</strong> and <strong>' + final_time_s + ' s</strong>');
 
     // Plotting the Route on the Google Map
     // Set the initial Lat and Long of the Google Map
