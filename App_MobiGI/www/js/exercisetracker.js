@@ -73,8 +73,6 @@ $("#startTracking_stop").live('click', function(){
 
     // Save the tracking data
     window.localStorage.setItem(track_id, JSON.stringify(tracking_data));
-    $("#position_info").html("Your current Position is: " + "<br>" + tracking_data);
-
 
     // Reset watch_id and tracking_data
     var watch_id = null;
@@ -83,7 +81,7 @@ $("#startTracking_stop").live('click', function(){
     // Tidy up the UI
     $("#track_id").val("").show();
     $("#startTracking_status").html("Stopped tracking workout: <strong>" + track_id + "</strong>");
-    $("#position_info").html("");
+    $("#position_info").hide();
 });
 
 $("#home_clearstorage_button").live('click',function(){
@@ -203,4 +201,36 @@ $('#track_info').live('pageshow', function(){
     trackPath.setMap(map);
 });
 
+// Save File Button
+$("#home_save_file").live('click', function(){
 
+    // Save data to storage
+    window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory,
+        function(dirEntry) {
+            dir.getFile("yourfile.txt", {
+                    create: true,
+                    exclusive: false
+                }, function (f) {
+                    f.createWriter(function (writer) {
+                            writer.onwriteend = function (evt) {
+                                alert("File successfully created!");
+                            };
+                            writer.write("Hello world!");
+                            writer.abort();
+
+                        },
+                        function (evt, where) {
+                            //console.log("Error writing file " + where + " :");
+                            // console.log(JSON.stringify(evt));
+                            //language=HTML
+                            alert("Error writing file " + where + " : " +"<br>" + JSON.stringify(evt));
+                        })
+                },
+                function (evt, where) {
+                    // console.log("Error resolving data folder " + where + " :");
+                    // console.log(JSON.stringify(evt));
+                    alert("Error resolving data folder " + where + " : " +"<br>" + JSON.stringify(evt));
+                }
+            )
+        })
+});

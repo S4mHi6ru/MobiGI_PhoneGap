@@ -9,9 +9,20 @@
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.1.0.min.js"></script>
     <script type="text/javascript" src="js/exercisetracker.js"></script>
-    <script type="text/javascript" src="googlemap.js"></script>
-    <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+    <!-- <script type="text/javascript" src="googlemap.js"></script> -->
+    <script type="text/javascript" charset="utf-8">
+        // Call onDeviceReady when Cordova is loaded.
+        function  onLoad() {
+            document.addEventListener("deviceready", onDeviceReady, false);
+        }
+        // Cordova is loaded and it is now safe to make calls Cordova methods
+        function onDeviceReady() {
+            // Now safe to use de Cordova API
+            console.log(cordova.file);
+        }
+    </script>
 
+    <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="css/jquery.mobile-1.1.0.min.css" />
 
 
@@ -24,7 +35,7 @@
     -->
 
 </head>
-<body>
+<body onload="onLoad()">
 <!-- Start of Home page -->
 <div data-role="page" id="home">
 
@@ -47,6 +58,19 @@
         <button id="home_network_button" data-icon="check">Internet Access Enabled</button>
         <button id="home_clearstorage_button">Clear local storage</button>
         <button id="home_seedgps_button">Load Seed GPS Data</button>
+    </div>
+    <div data-role="content">
+        <button id="home_save_file">Save File</button>
+    </div>
+
+    <div data-role="content">
+
+        <button id = "createFile">CREATE FILE</button>
+        <button id = "writeFile">WRITE FILE</button>
+        <button id = "readFile">READ FILE</button>
+        <button id = "removeFile">DELETE FILE</button>
+
+        <textarea id = "textarea"></textarea>
     </div>
 
 
