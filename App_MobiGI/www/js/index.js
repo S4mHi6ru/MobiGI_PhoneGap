@@ -61,7 +61,7 @@ function createFile() {
     var type = window.externalRootDirectory;
     var size = 5*1024*1024;
 
-    window.requestFileSystem(type, size, successCallback, errorCallback)
+    window.requestFileSystem(type, size, successCallback, errorCallback);
 
     function successCallback(fs) {
         fs.root.getFile('log.txt', {create: true, exclusive: true}, function(fileEntry) {
@@ -79,7 +79,7 @@ function writeFile() {
     var type = window.externalRootDirectory;
     var size = 5*1024*1024;
 
-    window.requestFileSystem(type, size, successCallback, errorCallback)
+    window.requestFileSystem(type, size, successCallback, errorCallback);
 
     function successCallback(fs) {
 
@@ -112,7 +112,7 @@ function readFile() {
     var type = window.TEMPORARY;
     var size = 5*1024*1024;
 
-    window.requestFileSystem(type, size, successCallback, errorCallback)
+    window.requestFileSystem(type, size, successCallback, errorCallback);
 
     function successCallback(fs) {
 
@@ -122,7 +122,7 @@ function readFile() {
                 var reader = new FileReader();
 
                 reader.onloadend = function(e) {
-                    var txtArea = document.getElementById('textarea');
+                    var txtArea = document.getElementById('textarea-1');
                     txtArea.value = this.result;
                 };
 
@@ -143,7 +143,7 @@ function removeFile() {
     var type = window.TEMPORARY;
     var size = 5*1024*1024;
 
-    window.requestFileSystem(type, size, successCallback, errorCallback)
+    window.requestFileSystem(type, size, successCallback, errorCallback);
 
     function successCallback(fs) {
         fs.root.getFile('log.txt', {create: false}, function(fileEntry) {

@@ -1,4 +1,4 @@
-# MobiGI PhoneGap App[![bitHound Score][bithound-img]][bithound-url]
+# MobiGI PhoneGap App
 
 A PhoneGap App to store movement-data from an android phone.
 

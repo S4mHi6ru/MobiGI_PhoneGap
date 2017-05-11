@@ -1,15 +1,15 @@
-<!DOCTYPE HTML>
 <html>
 <head>
     <title>ExerciseTracker-MobiGI</title>
 
-    <script type="text/javascript" src="js/cordova-2.0.0.js"></script>
+    <script type="text/javascript" src="js/cordova-1.7.0.js"></script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC1yNh4zQiofYxuY1NF6BnNAEI1Fp_1WD0"></script>
     <script type="text/javascript" src="js/json2.js"></script>
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.1.0.min.js"></script>
     <script type="text/javascript" src="js/exercisetracker.js"></script>
-    <!-- <script type="text/javascript" src="googlemap.js"></script> -->
+    <script type="text/javascript" src="js/index.js"></script>
+    <link rel="stylesheet" href="css/jquery.mobile-1.1.0.min.css"/>
     <script type="text/javascript" charset="utf-8">
         // Call onDeviceReady when Cordova is loaded.
         function  onLoad() {
@@ -18,20 +18,28 @@
         // Cordova is loaded and it is now safe to make calls Cordova methods
         function onDeviceReady() {
             // Now safe to use de Cordova API
-            console.log(cordova.file);
+            alert(cordova.file);
         }
     </script>
 
-    <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="css/jquery.mobile-1.1.0.min.css" />
 
 
 
     <!-- google API: AIzaSyC1yNh4zQiofYxuY1NF6BnNAEI1Fp_1WD0 -->
     <!--
-
-
     <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    script type="text/javascript" src="googlemap.js"></script>
+    <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="js/cordova-2.0.0.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC1yNh4zQiofYxuY1NF6BnNAEI1Fp_1WD0"></script>
+    <script type="text/javascript" src="js/json2.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="js/exercisetracker.js"></script>
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"/>
+
     -->
 
 </head>
@@ -70,7 +78,10 @@
         <button id = "readFile">READ FILE</button>
         <button id = "removeFile">DELETE FILE</button>
 
-        <textarea id = "textarea"></textarea>
+        <form>
+            <textarea id = "textarea-1"></textarea>
+        </form>
+
     </div>
 
 
@@ -99,13 +110,24 @@
             <input type="text" name="track_id" id="track_id" placeholder="Workout ID/Name"/>
         </div>
 
+        <div class="ui-field-contain">
+            <label for="select-choice-1" class="select">Workout type:</label>
+            <select name="select-choice-1" id="select-choice-1">
+                <option value="standard">Standard</option>
+                <option value="move">Gehen</option>
+                <option value="work">Arbeiten</option>
+                <option value="bicycle">Fahrradfahren</option>
+                <option value="train">Bahn</option>
+                <option value="car">Auto</option>
+            </select>
+        </div>
+
         <button data-role="button" id="startTracking_start">Start Tracking</button>
         <button data-role="button" id="startTracking_stop">Stop Tracking</button>
 
         <p id="startTracking_info"></p>
 
         <p id="position_info"></p>
-
 
     </div>
 
@@ -129,10 +151,7 @@
 
     <div data-role="content">
         <p id="tracks_recorded"></p>
-
-        <ul data-role="listview" id="history_tracklist">
-
-        </ul>
+        <ul data-role="listview" id="history_tracklist"></ul>
     </div>
 
 

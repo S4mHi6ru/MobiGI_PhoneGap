@@ -1,8 +1,23 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.mobigl" version="17.05.10.3" xmlns="http://www.w3.org/ns/widgets">
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id="com.phonegap.mobigl"
+        versionCode = "10"
+        version="17.05.11" >
+
     <name>MobiGI</name>
     <description>
-        Mit der in der LBS Vorlesung vorgestellten Entwicklungsumgebung PhoneGap soll eine App erstellt werden die Sensordaten des mobilen Gerätes (wie GPS, Schrittzähler, Accelerometer) als Service im Hintergrund (mit Focus auf Android) sammelt und dem Benutzer ermöglicht die Aktivitäten wie zum Beispiel Gehen, Arbeiten, Fahrradfahren, Einsteigen in der App zu annotieren. Als zusätzliche Funktion sollte die erstellte App ermöglichen den Datensatz mit den Sensordaten und den Aktivitäten als .csv zu exportieren. Zusätzlich, bei genügender Zeit könnte ein Demodatensatz erstellt und in R visualisiert werden.
+        Mit der in der LBS Vorlesung vorgestellten Entwicklungsumgebung PhoneGap soll eine App erstellt werden,
+        die Sensordaten des mobilen Gerätes (wie GPS, Schrittzähler, Accelerometer) als Service im Hintergrund
+        (mit Focus auf Android) sammelt und dem Benutzer ermöglicht die Aktivitäten wie zum Beispiel Gehen, Arbeiten,
+        Fahrradfahren, Einsteigen in der App zu annotieren.
+        Als zusätzliche Funktion sollte die erstellte App ermöglichen den Datensatz mit den Sensordaten und
+        den Aktivitäten als .csv zu exportieren. Zusätzlich, bei genügender Zeit könnte ein Demodatensatz erstellt und
+        in R visualisiert werden.
+
+        Code Reference:
+        https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-geolocation-tracking--mobile-11070
+        https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-persistence-graphing--mobile-11074
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
         FHNW - Students
@@ -15,7 +30,13 @@
     <feature name="File">
         <param name="android-package" value="org.apache.cordova.file.FileUtils" />
     </feature>
-
+    <feature name="http://api.phonegap.com/1.0/camera"/>
+    <feature name="http://api.phonegap.com/1.0/contacts"/>
+    <feature name="http://api.phonegap.com/1.0/file"/>
+    <feature name="http://api.phonegap.com/1.0/geolocation"/>
+    <feature name="http://api.phonegap.com/1.0/media"/>
+    <feature name="http://api.phonegap.com/1.0/network"/>
+    <feature name="http://api.phonegap.com/1.0/notification"/>
 
     <preference name="permissions" value="none"/>
     <preference name="DisallowOverscroll" value="true"/>
@@ -24,8 +45,6 @@
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
     <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,assets,root" />
-
-
 
     <preference name="useBrowserHistory" value="true" />
     <preference name="exit-on-suspend" value="false" />
