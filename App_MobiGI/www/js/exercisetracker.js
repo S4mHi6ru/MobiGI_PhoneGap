@@ -32,16 +32,27 @@ document.addEventListener("deviceready", function(){
 // hit start button
 var track_id = '';      // Name/ID of the exercise
 var watch_id = null;    // ID of the geolocation
-var tracking_data = []; // Array containing GPS position objects
+//var tracking_data = []; // Array containing GPS position objects
+var tracking_data = {
+    'position':[]
+}; // Array containing GPS position objects
 
 $("#startTracking_start").live('click', function(){
     // Start tracking the User
     watch_id = navigator.geolocation.watchPosition(
 
-        // Success
+        // (code changed by SHI - 20170515)
         function (position){
-            tracking_data.push(position);
-            console.log(JSON.stringify(position))
+            dataStore = {
+                'timestamp': position.timestamp,
+                'coords': [position.coords.latitude, position.coords.longitude]
+                //timestamp: JSON.stringify(position.timestamp),
+                //coords: [JSON.stringify(position.coords.latitude), JSON.stringify(position.coords.longitude)]
+            };
+            console.log("Store: " + JSON.stringify(dataStore))
+            // tracking_data.push(position);
+            tracking_data.position.push(dataStore);
+            console.log(tracking_data + "tracking data")
             //console.log(JSON.stringify(position))
             var lat = position.coords.latitude;
             var lng = position.coords.longitude;
@@ -55,7 +66,7 @@ $("#startTracking_start").live('click', function(){
         },
 
         // Settings
-        { frequency: 3000, enableHighAccuracy: true });
+        { frequency: 1000, enableHighAccuracy: true });
 
     // Tidy up the UI
     track_id = $("#track_id").val();
@@ -69,11 +80,12 @@ $("#startTracking_stop").live('click', function(){
     // Stop tracking the user
     navigator.geolocation.clearWatch(watch_id);
 
-    // Save the tracking data
-    console.log(JSON.stringify(tracking_data));
-    window.localStorage.setItem(track_id, JSON.stringify(tracking_data || null));
+    // Save the tracking data (code changed by SHI - 20170515)
+    console.log(tracking_data + " log for saveing");
+    //window.localStorage.setItem(track_id, JSON.stringify(tracking_data || null));
+    window.localStorage.setItem(track_id, JSON.stringify(tracking_data));
 
-    alert(JSON.stringify(tracking_data));
+    alert("write data " + JSON.stringify(tracking_data));
 
     // Reset watch_id and tracking_data
     var watch_id = null;
@@ -127,10 +139,11 @@ $('#track_info').live('pageshow', function(){
 
     // Get all the GPS data for the specific workout
     var data = window.localStorage.getItem(key);
-
+    console.log("loaded data " + data);
+    console.log("paresd data " + JSON.parse(data));
     // Turn the stringified GPS data back into a JS object
     try{
-        data = JSON.parse(data);
+        data = JSON.parse(data || "null");
     }
     catch (err){
         console.log(err)
@@ -140,13 +153,17 @@ $('#track_info').live('pageshow', function(){
 
     // Calculate the total distance travelled
     total_km = 0;
+    try{
+        for(i=0; i<data.length; i++){
 
-    for(i=0; i<data.length; i++){
-
-        if(i == (data.length-1)){
-            break;
+            if(i == (data.length-1)){
+                break;
+            }
+            total_km += gps_distance(data[i].coords.latitude, data[i].coords.longitude, data[i+1].coords.latitude, data[i+1].coords.longitude);
         }
-        total_km += gps_distance(data[i].coords.latitude, data[i].coords.longitude, data[i+1].coords.latitude, data[i+1].coords.longitude);
+    }
+    catch (err){
+        alert(err)
     }
 
     total_km_rounded = total_km.toFixed(2);
