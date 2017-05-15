@@ -33,9 +33,7 @@ document.addEventListener("deviceready", function(){
 var track_id = '';      // Name/ID of the exercise
 var watch_id = null;    // ID of the geolocation
 //var tracking_data = []; // Array containing GPS position objects
-var tracking_data = {
-    'position':[]
-}; // Array containing GPS position objects
+var tracking_data = []; // Array containing GPS position objects
 
 $("#startTracking_start").live('click', function(){
     // Start tracking the User
@@ -44,14 +42,25 @@ $("#startTracking_start").live('click', function(){
         // (code changed by SHI - 20170515)
         function (position){
             dataStore = {
-                'timestamp': position.timestamp,
-                'coords': [position.coords.latitude, position.coords.longitude]
-                //timestamp: JSON.stringify(position.timestamp),
+                'position':{
+                    'timestamp': position.timestamp,
+                    'coords': {
+                        'accuracy': position.coords.accuracy,
+                        'altitude': position.coords.altitude,
+                        'altitudeAccuracy': position.coords.altitudeAccuracy,
+                        'heading': position.coords.heading,
+                        'latitude': position.coords.latitude,
+                        'longitude': position.coords.longitude,
+                        'speed': position.coords.speed
+                    },
+                },
+
                 //coords: [JSON.stringify(position.coords.latitude), JSON.stringify(position.coords.longitude)]
             };
             console.log("Store: " + JSON.stringify(dataStore))
+            //tracking_data.position.push(JSON.stringify(dataStore));
             // tracking_data.push(position);
-            tracking_data.position.push(dataStore);
+            tracking_data.push(dataStore);
             console.log(tracking_data + "tracking data")
             //console.log(JSON.stringify(position))
             var lat = position.coords.latitude;
@@ -83,7 +92,7 @@ $("#startTracking_stop").live('click', function(){
     // Save the tracking data (code changed by SHI - 20170515)
     console.log(tracking_data + " log for saveing");
     //window.localStorage.setItem(track_id, JSON.stringify(tracking_data || null));
-    window.localStorage.setItem(track_id, JSON.stringify(tracking_data));
+    window.localStorage.setItem(track_id, JSON.stringify(tracking_data || null));
 
     alert("write data " + JSON.stringify(tracking_data));
 
@@ -140,10 +149,9 @@ $('#track_info').live('pageshow', function(){
     // Get all the GPS data for the specific workout
     var data = window.localStorage.getItem(key);
     console.log("loaded data " + data);
-    console.log("paresd data " + JSON.parse(data));
     // Turn the stringified GPS data back into a JS object
     try{
-        data = JSON.parse(data || "null");
+        data = JSON.parse(data);
     }
     catch (err){
         console.log(err)
