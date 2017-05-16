@@ -2,11 +2,11 @@
 <widget xmlns="http://www.w3.org/ns/widgets"
         id="com.phonegap.mobigl"
         versionCode = "10"
-        version="17.05.16" >
+        version="beta.17.05.16">
 
     <!-- versionCode is optional and Android only -->
 
-    <name>MobiGI</name>
+    <name>MobiGI-beta</name>
 
     <description>
         Mit der in der LBS Vorlesung vorgestellten Entwicklungsumgebung PhoneGap soll eine App erstellt werden,
