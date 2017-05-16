@@ -118,6 +118,7 @@ $("#startTracking_start").live('click', function(){
     // Tidy up the UI
     $("#track_id").hide();
     $("#startTracking_status").html("Tracking workout: <strong>" + track_id + "</strong>");
+    $("#position_info").hide();
 });
 
 $("#startTracking_stop").live('click', function(){

@@ -90,24 +90,25 @@
 
     <div data-role="content">
         <p id="startTracking_status"></p>
-        <div data-role="fieldcontain" class="ui-hide-label">
+        <div data-role="content" class="ui-hide-label">
             <label for="track_id">Track ID/Name:</label>
             <input type="text" name="track_id" id="track_id" placeholder="Workout ID/Name"/>
         </div>
-
-        <div class="ui-hide-label">
-            <label for="select_activity" class="select">Workout type:</label>
-            <select name="select_activity" id="select_activity" multiple="multiple" data-native-menu="false" data-placeholder="true">
-                <option>Select activity...</option>
-                <option value="standard" >Standard</option>
-                <option value="car">Auto</option>
-                <option value="train">Bahn</option>
-                <option value="bicycle">Fahrrad</option>
-                <option value="plain">Flugzeug</option>
-                <option value="walking">Zu Fuss</option>
-            </select>
+            <div data-role="content" class="ui-hide-label">
+                <label for="select_activity" class="select">Workout type:</label>
+                <select name="select_activity" id="select_activity" multiple="multiple" data-native-menu="false" data-placeholder="true">
+                    <option>Select activity...</option>
+                    <option value="standard" >Standard</option>
+                    <option value="car">Auto</option>
+                    <option value="train">Bahn</option>
+                    <option value="bicycle">Fahrrad</option>
+                    <option value="plain">Flugzeug</option>
+                    <option value="walking">Zu Fuss</option>
+                </select>
+            </div>
         </div>
 
+    <div data-role="content">
         <div class="ui-field-contain">
         <button data-role="button" id="startTracking_start">Start Tracking</button>
         <button data-role="button" id="startTracking_stop">Stop Tracking</button>
@@ -116,9 +117,7 @@
         <div class="ui-field-contain">
             <button data-role="button" id="show_dict">Show / Hide Data</button>
         </div>
-
     </div>
-
 
     <div data-role="content">
         <p id="startTracking_info"></p>
