@@ -5,10 +5,9 @@
     <meta http-equiv="Content-Security-Policy"
           content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *"/>
 
-    <script type="text/javascript" src="js/cordova-1.7.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/cordova-1.7.0.js"></script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC1bIwmK5EMT38i5e5s44EhGjoLrRB-pAk"></script>
-    <script type="text/javascript" src="js/json2.js"></script>
-    <script type="text/javascript" src="js/FileSystem.js"></script>
+    <!-- <script type="text/javascript" src="js/json2.js"></script> -->
 
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.1.0.min.js"></script>
@@ -118,7 +117,9 @@
         <p id="position_info"></p>
 
     </div>
-
+    <div data-role="content">
+        <button data-role="button" id="show_dict">Show Data</button>
+    </div>
 
 </div><!-- /page -->
 

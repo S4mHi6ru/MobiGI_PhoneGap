@@ -19,7 +19,9 @@ function gps_distance(lat1, lon1, lat2, lon2){
     return d;
 }
 
-// code from : https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-persistence-graphing--mobile-11074
+// code from :
+// https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-geolocation-tracking--mobile-11070
+// https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-persistence-graphing--mobile-11074
 document.addEventListener("deviceready", function(){
 
     if(navigator.network.connection.type == Connection.NONE){
@@ -35,12 +37,22 @@ var watch_id = null;    // ID of the geolocation
 //var tracking_data = []; // Array containing GPS position objects
 var tracking_data = []; // Array containing GPS position objects
 
+var data_dict = {};
+var addpair = function (my_key, my_value) {
+    data_dict[my_key] = my_value;
+}
+var givevalue = function (my_key) {
+    return data_dict[my_key];
+}
+
+
 $("#startTracking_start").live('click', function(){
     // Start tracking the User
     watch_id = navigator.geolocation.watchPosition(
 
         // (code changed by SHI - 20170515)
         function (position){
+
             dataStore = {
                     'timestamp': position.timestamp,
                     'coords': {
@@ -55,29 +67,42 @@ $("#startTracking_start").live('click', function(){
 
                 //coords: [JSON.stringify(position.coords.latitude), JSON.stringify(position.coords.longitude)]
             };
+
             console.log("Store json: " + JSON.stringify(dataStore));
 
-            //tracking_data.position.push(JSON.stringify(dataStore));
+            tracking_data.push(dataStore);
+            //tracking_data.push(JSON.stringify(dataStore));
             // tracking_data.push(position);
-            tracking_data.push(JSON.stringify(dataStore));
+            //tracking_data.push(dataStore);
             console.log("array :" + tracking_data);
             console.log("json fake: " + "'[" + tracking_data + "]'");
             //console.log(tracking_data + "tracking data")
             //console.log(JSON.stringify(position))
             var lat = position.coords.latitude;
             var lng = position.coords.longitude;
+            $("#position_info").html("Your current Position is: " + "<br>" + "lat : " + lat + " lng : " + lng);
+
+            //addpair(track_id, "[" + tracking_data + "]");
+            addpair(track_id, JSON.stringify(tracking_data));
+            console.log("dict: " + data_dict);
+        },
+        /*
+        function(position){
+            tracking_data.push(position);
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
             $("#position_info").html("Your current Position is: " + "<br>" + "lat : " + lat + " lng : " + lng + "<br>" + tracking_data);
         },
+         */
 
         // Error
         function (error){
             console.log(error);
             $("#position_info").html("error: " + error);
-            alert("startTracking: " + error);
         },
 
         // Settings
-        { frequency: 1000, enableHighAccuracy: true });
+        { frequency: 3000, enableHighAccuracy: true });
 
     // Tidy up the UI
     track_id = $("#track_id").val();
@@ -91,16 +116,16 @@ $("#startTracking_stop").live('click', function(){
     navigator.geolocation.clearWatch(watch_id);
 
     // Save the tracking data (code changed by SHI - 20170515)
-    console.log(tracking_data + " log for saveing");
-    //window.localStorage.setItem(track_id, JSON.stringify(tracking_data || null));
-    //tracking_data = "'[" + tracking_data + "]'";
-    window.localStorage.setItem(track_id, JSON.stringify(tracking_data));
-    console.log("[" + tracking_data + "]");
+
+    window.localStorage.setItem(track_id, data_dict[track_id]);
+    //window.localStorage.setItem(track_id, JSON.stringify(tracking_data));
+
+    console.log("file: " + JSON.stringify(tracking_data));
     //alert("write data " + JSON.stringify(tracking_data));
 
     // Reset watch_id and tracking_data
     var watch_id = null;
-    var tracking_data = null;
+    var tracking_data = [];
 
     // Tidy up the UI
     $("#track_id").val("").show();
@@ -110,6 +135,7 @@ $("#startTracking_stop").live('click', function(){
 
 $("#home_clearstorage_button").live('click', function(){
     window.localStorage.clear();
+    var data_dict = {};
 });
 
 $("#home_seedgps_button").live('click', function(){
@@ -153,35 +179,29 @@ $('#track_info').live('pageshow', function(){
     var data = window.localStorage.getItem(key);
     console.log("loaded data " + data);
     // Turn the stringified GPS data back into a JS object
-    data = JSON.parse(data);
-    console.log(data);
-    /*
+
     try{
         data = JSON.parse(data);
         console.log(data);
     }
     catch (err){
-        console.log(err)
-        alert("JSON read" + err)
-
+        console.log("parse err:" + err)
+        //alert("JSON read" + err)
+        data = JSON.parse(givevalue(track_id));
+        alert("data from var: " + data);
         //data = [{"timestamp": 1494366039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53343424644297, "longitude": 7.647811924831444}},{"timestamp": 1494376039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53320514562638, "longitude": 7.647614359555965}}]
     }
-    */
 
 
     // Calculate the total distance travelled
     total_km = 0;
-    try{
-        for(i=0; i<data.length; i++){
+    console.log("length: " + data.length);
+    for(i=0; i<data.length; i++){
 
-            if(i == (data.length-1)){
-                break;
-            }
-            total_km += gps_distance(data[i].coords.latitude, data[i].coords.longitude, data[i+1].coords.latitude, data[i+1].coords.longitude);
+        if(i == (data.length-1)){
+            break;
         }
-    }
-    catch (err){
-        alert(err)
+        total_km += gps_distance(data[i].coords.latitude, data[i].coords.longitude, data[i+1].coords.latitude, data[i+1].coords.longitude);
     }
 
     total_km_rounded = total_km.toFixed(2);
@@ -264,3 +284,6 @@ $("#home_save_file").live('click', function(){
     }
 });
 
+$("#show_dict").live('click', function(){
+    console.log(data_dict);
+});
