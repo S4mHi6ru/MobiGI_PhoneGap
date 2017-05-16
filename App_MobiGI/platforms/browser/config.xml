@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.mobigl" version="17.05.16" versionCode="10" xmlns="http://www.w3.org/ns/widgets">
+<widget id="com.phonegap.mobigl" version="beta.17.05.16" versionCode="10" xmlns="http://www.w3.org/ns/widgets">
     <feature name="Camera">
         <param name="browser-package" value="Camera" />
     </feature>
     <feature name="Device">
         <param name="browser-package" value="Device" />
     </feature>
-    <name>MobiGI</name>
+    <name>MobiGI-beta</name>
     <description>
         Mit der in der LBS Vorlesung vorgestellten Entwicklungsumgebung PhoneGap soll eine App erstellt werden,
         die Sensordaten des mobilen Gerätes (wie GPS, Schrittzähler, Accelerometer) als Service im Hintergrund
@@ -15,6 +15,8 @@
         Als zusätzliche Funktion sollte die erstellte App ermöglichen den Datensatz mit den Sensordaten und
         den Aktivitäten als .csv zu exportieren. Zusätzlich, bei genügender Zeit könnte ein Demodatensatz erstellt und
         in R visualisiert werden.
+
+        Supports only Android Phones.
 
         Code Reference:
         https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-geolocation-tracking--mobile-11070
