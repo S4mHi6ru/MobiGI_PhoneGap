@@ -51,7 +51,8 @@ $("#startTracking_start").live('click', function(){
     watch_id = navigator.geolocation.watchPosition(
 
         // (code changed by SHI - 20170515)
-        function (position){
+        // onSuccess
+        function onSuccess(position) {
 
             dataStore = {
                     'timestamp': position.timestamp,
@@ -96,7 +97,7 @@ $("#startTracking_start").live('click', function(){
          */
 
         // Error
-        function (error){
+        function onError(error) {
             console.log(error);
             $("#position_info").html("error: " + error);
         },
@@ -125,23 +126,22 @@ $("#startTracking_stop").live('click', function(){
 
     // Reset watch_id and tracking_data
     var watch_id = null;
-    var tracking_data = [];
+    tracking_data = [];
+    data_dict = {};
 
     // Tidy up the UI
     $("#track_id").val("").show();
     $("#startTracking_status").html("Stopped tracking workout: <strong>" + track_id + "</strong>");
-    $("#position_info").html("");
+    $("#position_info").val("").show();
 });
 
 $("#home_clearstorage_button").live('click', function(){
     window.localStorage.clear();
-    var data_dict = {};
 });
 
 $("#home_seedgps_button").live('click', function(){
     window.localStorage.setItem('Sample block', '[{"timestamp":1335700802000,"coords":{"heading":null,"altitude":null,"longitude":170.33488333333335,"accuracy":0,"latitude":-45.87475166666666,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700803000,"coords":{"heading":null,"altitude":null,"longitude":170.33481666666665,"accuracy":0,"latitude":-45.87465,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700804000,"coords":{"heading":null,"altitude":null,"longitude":170.33426999999998,"accuracy":0,"latitude":-45.873708333333326,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700805000,"coords":{"heading":null,"altitude":null,"longitude":170.33318333333335,"accuracy":0,"latitude":-45.87178333333333,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700806000,"coords":{"heading":null,"altitude":null,"longitude":170.33416166666666,"accuracy":0,"latitude":-45.871478333333336,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700807000,"coords":{"heading":null,"altitude":null,"longitude":170.33526833333332,"accuracy":0,"latitude":-45.873394999999995,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700808000,"coords":{"heading":null,"altitude":null,"longitude":170.33427333333336,"accuracy":0,"latitude":-45.873711666666665,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700809000,"coords":{"heading":null,"altitude":null,"longitude":170.33488333333335,"accuracy":0,"latitude":-45.87475166666666,"speed":null,"altitudeAccuracy":null}}]');
     window.localStorage.setItem('Sample Muttenz', '[{"timestamp": 1494366039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53343424644297, "longitude": 7.647811924831444}},{"timestamp": 1494376039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53320514562638, "longitude": 7.647614359555965}},{"timestamp": 1494386039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53299336200655, "longitude": 7.647445342000614}},{"timestamp": 1494396039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53314657284183, "longitude": 7.646490248556102}},{"timestamp": 1494406039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53367138793076, "longitude": 7.643951310510298}},{"timestamp": 1494416039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53406042600069, "longitude": 7.642599268547949}},{"timestamp": 1494426039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53397150778124, "longitude": 7.642489930718918}},{"timestamp": 1494436039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53392032330245, "longitude": 7.642182859385558}},{"timestamp": 1494446039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53402336934874, "longitude": 7.64126753261418}},{"timestamp": 1494456039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53435210076379, "longitude": 7.639281311688029}},{"timestamp": 1494466039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53416699067378, "longitude": 7.639221464495107}},{"timestamp": 1494476039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53412290498257, "longitude": 7.638953991973576}},{"timestamp": 1494486039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53351401829625, "longitude": 7.638747717871397}},{"timestamp": 1494496039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.5335293159634, "longitude": 7.638640434117157}},{"timestamp": 1494506039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53365059205396, "longitude": 7.638598149881323}}]');
-    window.localStorage.setItem('Sample FHNW', '[{"timestamp":1494922116249,"coords":{"accuracy":31,"altitude":null,"altitudeAccuracy":null,"heading":null,"latitude":47.5339217,"longitude":7.637921899999999,"speed":null}}]');
 });
 
 // When the user views the history page
@@ -231,7 +231,6 @@ $('#track_info').live('pageshow', function(){
 
     // Create the Google Map, set options
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
     var trackCoords = [];
 
     //Add each GPS entry to an array
@@ -285,5 +284,8 @@ $("#home_save_file").live('click', function(){
 });
 
 $("#show_dict").live('click', function(){
+    console.log('---------- START: Show Data ----------');
     console.log(data_dict);
+    console.log(window.localStorage);
+    console.log('---------- STOP: Show Data ----------');
 });
