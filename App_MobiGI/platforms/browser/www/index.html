@@ -98,9 +98,10 @@
         </div>
 
         <div class="ui-field-contain">
-            <label for="select-choice-1" class="select">Workout type:</label>
-            <select name="select-choice-1" id="select-choice-1">
-                <option value="standard">Standard</option>
+            <label for="select-workout">Workout type(s):</label>
+            <select name="select-workout" id="select-workout" multiple="multiple" data-native-menu="false">
+                <option>Choose workout</option>
+                <option value="standard" selected="selected">Standard</option>
                 <option value="move">Gehen</option>
                 <option value="work">Arbeiten</option>
                 <option value="bicycle">Fahrradfahren</option>
@@ -112,13 +113,12 @@
         <button data-role="button" id="startTracking_start">Start Tracking</button>
         <button data-role="button" id="startTracking_stop">Stop Tracking</button>
 
-        <p id="startTracking_info"></p>
-
-        <p id="position_info"></p>
-
+        <button data-role="button" id="show_dict">Show / Hide Data</button>
     </div>
+
     <div data-role="content">
-        <button data-role="button" id="show_dict">Show Data</button>
+        <p id="startTracking_info"></p>
+        <p id="position_info"></p>
     </div>
 
 </div><!-- /page -->

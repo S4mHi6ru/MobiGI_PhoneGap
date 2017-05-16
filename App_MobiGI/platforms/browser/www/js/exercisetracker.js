@@ -65,6 +65,7 @@ $("#startTracking_start").live('click', function(){
                         'longitude': position.coords.longitude,
                         'speed': position.coords.speed
                     },
+                    'workouttype': document.getElementById("workout-choice")
 
                 //coords: [JSON.stringify(position.coords.latitude), JSON.stringify(position.coords.longitude)]
             };
@@ -132,7 +133,7 @@ $("#startTracking_stop").live('click', function(){
     // Tidy up the UI
     $("#track_id").val("").show();
     $("#startTracking_status").html("Stopped tracking workout: <strong>" + track_id + "</strong>");
-    $("#position_info").val("").show();
+    $("#position_info").html("");
 });
 
 $("#home_clearstorage_button").live('click', function(){
