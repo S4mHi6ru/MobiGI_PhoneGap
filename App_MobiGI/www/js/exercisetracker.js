@@ -54,7 +54,7 @@ $("#startTracking_start").live('click', function(){
 
         // (code changed by SHI - 20170515)
         // onSuccess
-        function onSuccess(position) {
+        function (position) {
 
             dataStore = {
                     'timestamp': position.timestamp,
@@ -98,7 +98,7 @@ $("#startTracking_start").live('click', function(){
          */
 
         // Error
-        function onError(error) {
+        function (error) {
             console.log(error);
             $("#position_info").html("error: " + error);
         },

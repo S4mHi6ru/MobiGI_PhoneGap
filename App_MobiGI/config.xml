@@ -7,7 +7,7 @@
 
     <!-- versionCode is optional and Android only -->
 
-    <name>MobiGI-beta</name>
+    <name>MobiGI</name>
 
     <description>
         LBS / Sensordaten: PhoneGap LBS App zur Sammlung und Annotation von Sensordaten
