@@ -10,23 +10,11 @@
     <name>MobiGI-beta</name>
 
     <description>
-        Mit der in der LBS Vorlesung vorgestellten Entwicklungsumgebung PhoneGap soll eine App erstellt werden,
-        die Sensordaten des mobilen Gerätes (wie GPS, Schrittzähler, Accelerometer) als Service im Hintergrund
-        (mit Focus auf Android) sammelt und dem Benutzer ermöglicht die Aktivitäten wie zum Beispiel Gehen, Arbeiten,
-        Fahrradfahren, Einsteigen in der App zu annotieren.
-        Als zusätzliche Funktion sollte die erstellte App ermöglichen den Datensatz mit den Sensordaten und
-        den Aktivitäten als .csv zu exportieren. Zusätzlich, bei genügender Zeit könnte ein Demodatensatz erstellt und
-        in R visualisiert werden.
-
-        Supports only Android Phones.
-
-        Code Reference:
-        https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-geolocation-tracking--mobile-11070
-        https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-persistence-graphing--mobile-11074
+        LBS / Sensordaten: PhoneGap LBS App zur Sammlung und Annotation von Sensordaten
     </description>
 
     <author email="support@phonegap.com" href="http://phonegap.com">
-        FHNW - Students
+        FHNW-Students: S. Hirsbrunner und C. Zbinden
     </author>
 
     <content src="index.html"/>
@@ -58,7 +46,7 @@
     <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0"/>
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1"/>
 
-    <gap:icon src="img/icon.png"/>
+    <icon src="img/icon.png"/>
     <gap:splash src="img/splash.png"/>
 
     <platform name="android">
@@ -74,6 +62,7 @@
         <icon qualifier="xhdpi" src="res/icons/android/icon-96-xhdpi.png"/>
         <icon qualifier="xxhdpi" src="res/icons/android/icon-144-xxhdpi.png"/>
         <icon qualifier="xxxhdpi" src="res/icons/android/icon-192-xxxhdpi.png"/>
+        <icon qualifier="fr-xxhdpi" src="res/icons/android/icon-fr-xxhdpi.png"/>
         <splash qualifier="ldpi" src="res/screens/android/screen-ldpi-portrait.png"/>
         <splash qualifier="mdpi" src="res/screens/android/screen-mdpi-portrait.png"/>
         <splash qualifier="hdpi" src="res/screens/android/screen-hdpi-portrait.png"/>
