@@ -48,7 +48,7 @@
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1"/>
 
     <icon src="img/icon.png"/>
-    <gap:splash src="img/splash.png"/>
+    <splash src="img/splash.png"/>
 
     <platform name="android">
         <icon density="ldpi" src="www/res/icon/android/icon-36-ldpi.png"/>
