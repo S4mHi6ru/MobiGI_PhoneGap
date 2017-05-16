@@ -25,6 +25,9 @@
     <author email="support@phonegap.com" href="http://phonegap.com">
         FHNW - Students
     </author>
+
+    <icon src="www/img/appIcon.png"/>
+
     <content src="index.html"/>
     <preference name="permissions" value="none"/>
     <preference name="DisallowOverscroll" value="true"/>
