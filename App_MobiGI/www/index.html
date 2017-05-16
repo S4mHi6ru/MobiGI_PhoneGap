@@ -2,9 +2,14 @@
 <head>
     <title>MobiGI-beta</title>
 
-    <meta http-equiv="Content-Security-Policy"
-          content="default-src * 'unsafe-inline'; media-src *"/>
-
+    <meta charset="utf-8"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"/>
+    <!--
+   <meta http-equiv="Content-Security-Policy"
+         content="default-src * 'unsafe-inline'; media-src *"/>
+   -->
     <script type="text/javascript" charset="utf-8" src="js/cordova-1.7.0.js"></script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC1bIwmK5EMT38i5e5s44EhGjoLrRB-pAk"></script>
     <!-- <script type="text/javascript" src="js/json2.js"></script> -->
@@ -24,8 +29,6 @@
         // Cordova is loaded and it is now safe to make calls Cordova methods
         function onDeviceReady() {
             // Now safe to use de Cordova API
-            console.log(cordova.file);
-            console.log('hiho')
             alert('code: 4');
             var options = { frequency: 3000 };
             watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
