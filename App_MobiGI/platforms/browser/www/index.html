@@ -2,9 +2,13 @@
 <head>
     <title>ExerciseTracker-MobiGI</title>
 
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *"/>
+
     <script type="text/javascript" src="js/cordova-1.7.0.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC1yNh4zQiofYxuY1NF6BnNAEI1Fp_1WD0"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC1bIwmK5EMT38i5e5s44EhGjoLrRB-pAk"></script>
     <script type="text/javascript" src="js/json2.js"></script>
+    <script type="text/javascript" src="js/FileSystem.js"></script>
 
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.1.0.min.js"></script>
@@ -35,7 +39,6 @@
             watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
         }
     </script>
-
 
 
     <!-- google API: AIzaSyC1yNh4zQiofYxuY1NF6BnNAEI1Fp_1WD0 -->
@@ -69,20 +72,6 @@
     <div data-role="content">
         <button id="home_save_file">Save File</button>
     </div>
-
-    <div data-role="content">
-
-        <button id = "createFile">CREATE FILE</button>
-        <button id = "writeFile">WRITE FILE</button>
-        <button id = "readFile">READ FILE</button>
-        <button id = "removeFile">DELETE FILE</button>
-
-        <form>
-            <textarea id = "textarea-1"></textarea>
-        </form>
-
-    </div>
-
 
 </div>
 <!-- End of Home page -->

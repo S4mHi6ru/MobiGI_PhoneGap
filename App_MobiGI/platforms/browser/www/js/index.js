@@ -55,108 +55,66 @@ var app = {
 };
 
 
-// Download Function from https://www.tutorialspoint.com/cordova/cordova_file_system.htm
+/* globals console,document,window,cordova */
+document.addEventListener('deviceready', onDeviceReady, false);
 
-function createFile() {
-    var type = window.externalRootDirectory;
-    var size = 5*1024*1024;
+var logOb;
 
-    window.requestFileSystem(type, size, successCallback, errorCallback);
+function fail(e) {
+    console.log("FileSystem Error");
+    console.dir(e);
+}
 
-    function successCallback(fs) {
-        fs.root.getFile('log.txt', {create: true, exclusive: true}, function(fileEntry) {
-            alert('File creation successfull!')
-        }, errorCallback);
-    }
+function onDeviceReady() {
 
-    function errorCallback(error) {
-        alert("ERROR: " + error.code)
-    }
+    window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir) {
+        console.log("got main dir",dir);
+        dir.getFile("log.txt", {create:true}, function(file) {
+            console.log("got the file", file);
+            logOb = file;
+            writeLog("App started");
+        });
+    });
+
+    document.querySelector("#actionOne").addEventListener("touchend", function(e) {
+        //Ok, normal stuff for actionOne here
+        //
+        //Now log it
+        writeLog("actionOne fired");
+    }, false);
+
+    document.querySelector("#actionTwo").addEventListener("touchend", function(e) {
+        //Ok, normal stuff for actionTwo here
+        //
+        //Now log it
+        writeLog("actionTwo fired");
+    }, false);
 
 }
 
-function writeFile() {
-    var type = window.externalRootDirectory;
-    var size = 5*1024*1024;
+function writeLog(str) {
+    if(!logOb) return;
+    var log = str + " [" + (new Date()) + "]\n";
+    console.log("going to log "+log);
+    logOb.createWriter(function(fileWriter) {
 
-    window.requestFileSystem(type, size, successCallback, errorCallback);
+        fileWriter.seek(fileWriter.length);
 
-    function successCallback(fs) {
-
-        fs.root.getFile('log.txt', {create: true}, function(fileEntry) {
-
-            fileEntry.createWriter(function(fileWriter) {
-                fileWriter.onwriteend = function(e) {
-                    alert('Write completed.');
-                };
-
-                fileWriter.onerror = function(e) {
-                    alert('Write failed: ' + e.toString());
-                };
-
-                var blob = new Blob(['Lorem Ipsum'], {type: 'text/plain'});
-                fileWriter.write(blob);
-            }, errorCallback);
-
-        }, errorCallback);
-
-    }
-
-    function errorCallback(error) {
-        alert("ERROR: " + error.code)
-    }
-
+        var blob = new Blob([log], {type:'text/plain'});
+        fileWriter.write(blob);
+        console.log("ok, in theory i worked");
+    }, fail);
 }
 
-function readFile() {
-    var type = window.TEMPORARY;
-    var size = 5*1024*1024;
+function justForTesting() {
+    logOb.file(function(file) {
+        var reader = new FileReader();
 
-    window.requestFileSystem(type, size, successCallback, errorCallback);
+        reader.onloadend = function(e) {
+            console.log(this.result);
+        };
 
-    function successCallback(fs) {
-
-        fs.root.getFile('log.txt', {}, function(fileEntry) {
-
-            fileEntry.file(function(file) {
-                var reader = new FileReader();
-
-                reader.onloadend = function(e) {
-                    var txtArea = document.getElementById('textarea-1');
-                    txtArea.value = this.result;
-                };
-
-                reader.readAsText(file);
-
-            }, errorCallback);
-
-        }, errorCallback);
-    }
-
-    function errorCallback(error) {
-        alert("ERROR: " + error.code)
-    }
-
-}
-
-function removeFile() {
-    var type = window.TEMPORARY;
-    var size = 5*1024*1024;
-
-    window.requestFileSystem(type, size, successCallback, errorCallback);
-
-    function successCallback(fs) {
-        fs.root.getFile('log.txt', {create: false}, function(fileEntry) {
-
-            fileEntry.remove(function() {
-                alert('File removed.');
-            }, errorCallback);
-
-        }, errorCallback);
-    }
-
-    function errorCallback(error) {
-        alert("ERROR: " + error.code)
-    }
+        reader.readAsText(file);
+    }, fail);
 
 }
