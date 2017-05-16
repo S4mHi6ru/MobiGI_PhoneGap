@@ -34,8 +34,9 @@ document.addEventListener("deviceready", function(){
 // hit start button
 var track_id = '';      // Name/ID of the exercise
 var watch_id = null;    // ID of the geolocation
-//var tracking_data = []; // Array containing GPS position objects
 var tracking_data = []; // Array containing GPS position objects
+
+var select_activity = [];
 
 var data_dict = {};
 var addpair = function (my_key, my_value) {
@@ -56,6 +57,7 @@ $("#startTracking_start").live('click', function(){
 
             dataStore = {
                     'timestamp': position.timestamp,
+                'activity': select_activity.join(" and "),
                     'coords': {
                         'accuracy': position.coords.accuracy,
                         'altitude': position.coords.altitude,
@@ -65,9 +67,6 @@ $("#startTracking_start").live('click', function(){
                         'longitude': position.coords.longitude,
                         'speed': position.coords.speed
                     },
-                    'workouttype': document.getElementById("workout-choice")
-
-                //coords: [JSON.stringify(position.coords.latitude), JSON.stringify(position.coords.longitude)]
             };
 
             console.log("Store json: " + JSON.stringify(dataStore));
@@ -106,9 +105,11 @@ $("#startTracking_start").live('click', function(){
         // Settings
         { frequency: 3000, enableHighAccuracy: true });
 
-    // Tidy up the UI
+    // Fill up variables
     track_id = $("#track_id").val();
+    select_activity = $("#select_activity").val();
 
+    // Tidy up the UI
     $("#track_id").hide();
     $("#startTracking_status").html("Tracking workout: <strong>" + track_id + "</strong>");
 });
@@ -128,11 +129,13 @@ $("#startTracking_stop").live('click', function(){
     // Reset watch_id and tracking_data
     var watch_id = null;
     tracking_data = [];
+    select_activity = [];
     data_dict = {};
 
     // Tidy up the UI
     $("#track_id").val("").show();
     $("#startTracking_status").html("Stopped tracking workout: <strong>" + track_id + "</strong>");
+    $("#select_activity").not(':checked');
     $("#position_info").html("");
 });
 
@@ -215,9 +218,10 @@ $('#track_info').live('pageshow', function(){
     total_time_s = total_time_ms / 1000;
 
     final_time_m = Math.floor(total_time_s / 60);
-    final_time_s = total_time_s - (final_time_m * 60);
+    final_time_s = Math.round((total_time_s - (final_time_m * 60)) * 100) / 100;
 
-    $("#track_info_info").html('Travelled <strong>' + total_km_rounded + ' km </strong> in <strong>' + final_time_m + ' m</strong> and <strong>' + final_time_s + ' s</strong>');
+    $("#track_info_info").html('Travelled <strong>' + total_km_rounded + ' km </strong> in <strong>' + final_time_m + ' m</strong> and <strong>' + final_time_s + ' s</strong>'
+        + '<br>by ' + ' <strong>' + data[0].activity + '</strong>');
 
     // Plotting the Route on the Google Map
     // Set the initial Lat and Long of the Google Map

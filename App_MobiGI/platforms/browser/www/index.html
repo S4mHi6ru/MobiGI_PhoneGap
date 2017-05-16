@@ -3,7 +3,7 @@
     <title>MobiGI-beta</title>
 
     <meta http-equiv="Content-Security-Policy"
-          content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *"/>
+          content="default-src * 'unsafe-inline'; media-src *"/>
 
     <script type="text/javascript" charset="utf-8" src="js/cordova-1.7.0.js"></script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC1bIwmK5EMT38i5e5s44EhGjoLrRB-pAk"></script>
@@ -16,13 +16,6 @@
     <script type="text/javascript" src="js/exercisetracker.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
 
-    <!--
-        <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile-1.1.0.min.js"></script>
-        <link rel="stylesheet" href="css/jquery.mobile-1.1.0.min.css"/>
-
-
-        -->
     <script type="text/javascript" charset="utf-8">
         // Call onDeviceReady when Cordova is loaded.
         function  onLoad() {
@@ -98,15 +91,15 @@
         </div>
 
         <div class="ui-field-contain">
-            <label for="select-workout">Workout type(s):</label>
-            <select name="select-workout" id="select-workout" multiple="multiple" data-native-menu="false">
-                <option>Choose workout</option>
-                <option value="standard" selected="selected">Standard</option>
-                <option value="move">Gehen</option>
-                <option value="work">Arbeiten</option>
-                <option value="bicycle">Fahrradfahren</option>
-                <option value="train">Bahn</option>
+            <label for="select_activity">Select activity:</label>
+            <select name="select_activity" id="select_activity" multiple="multiple" data-native-menu="false">
+                <option>Select activity</option>
+                <option value="standard">Standard</option>
                 <option value="car">Auto</option>
+                <option value="train">Bahn</option>
+                <option value="bicycle">Fahrrad</option>
+                <option value="plain">Flugzeug</option>
+                <option value="walking">Zu Fuss</option>
             </select>
         </div>
 
