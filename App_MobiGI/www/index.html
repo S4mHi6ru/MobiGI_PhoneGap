@@ -95,11 +95,11 @@
             <input type="text" name="track_id" id="track_id" placeholder="Workout ID/Name"/>
         </div>
 
-        <div class="ui-field-contain">
-            <label for="select_activity">Select activity:</label>
-            <select name="select_activity" id="select_activity" multiple="multiple" data-native-menu="false">
-                <option>Select activity</option>
-                <option value="standard">Standard</option>
+        <div class="ui-hide-label">
+            <label for="select_activity" class="select">Workout type:</label>
+            <select name="select_activity" id="select_activity" multiple="multiple" data-native-menu="false" data-placeholder="true">
+                <option>Select activity...</option>
+                <option value="standard" >Standard</option>
                 <option value="car">Auto</option>
                 <option value="train">Bahn</option>
                 <option value="bicycle">Fahrrad</option>
@@ -108,15 +108,21 @@
             </select>
         </div>
 
+        <div class="ui-field-contain">
         <button data-role="button" id="startTracking_start">Start Tracking</button>
         <button data-role="button" id="startTracking_stop">Stop Tracking</button>
+        </div>
 
-        <button data-role="button" id="show_dict">Show / Hide Data</button>
+        <div class="ui-field-contain">
+            <button data-role="button" id="show_dict">Show / Hide Data</button>
+        </div>
+
     </div>
+
 
     <div data-role="content">
         <p id="startTracking_info"></p>
-        <p id="position_info"></p>
+        <p data-role="fieldcontain" id="position_info"></p>
     </div>
 
 </div><!-- /page -->

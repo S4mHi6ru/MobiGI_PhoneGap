@@ -36,6 +36,7 @@ var track_id = '';      // Name/ID of the exercise
 var watch_id = null;    // ID of the geolocation
 var tracking_data = []; // Array containing GPS position objects
 
+var publish_text = true;
 var select_activity = [];
 
 var data_dict = {};
@@ -57,7 +58,7 @@ $("#startTracking_start").live('click', function(){
 
             dataStore = {
                     'timestamp': position.timestamp,
-                'activity': select_activity.join(" and "),
+                'activity': select_activity,
                     'coords': {
                         'accuracy': position.coords.accuracy,
                         'altitude': position.coords.altitude,
@@ -107,7 +108,12 @@ $("#startTracking_start").live('click', function(){
 
     // Fill up variables
     track_id = $("#track_id").val();
-    select_activity = $("#select_activity").val();
+    try {
+        select_activity = $("#select_activity").val().join(" and ");
+    }
+    catch (err){
+        select_activity.push("No Activity");
+    }
 
     // Tidy up the UI
     $("#track_id").hide();
@@ -288,9 +294,25 @@ $("#home_save_file").live('click', function(){
     }
 });
 
+// Show stored data in a app view
 $("#show_dict").live('click', function(){
-    console.log('---------- START: Show Data ----------');
-    console.log(data_dict);
-    console.log(window.localStorage);
-    console.log('---------- STOP: Show Data ----------');
+
+    if (publish_text == true){
+        console.log('---------- START: Show Data ----------');
+        console.log(data_dict);
+        console.log(window.localStorage);
+        console.log('---------- STOP: Show Data ----------');
+
+        var text = [];
+
+        for (var i in localStorage){
+            text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(jQuery.parseJSON(localStorage[i]), null, 2) + "</pre>");
+        }
+
+        $("#position_info").html("<div class='ui-field-contain'><h3>Your Data: </h3><br>"+ text.join("") + "</div>");
+    }
+    else {
+        $("#position_info").html("");
+    }
+    publish_text = !publish_text;
 });
