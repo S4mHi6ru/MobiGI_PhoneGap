@@ -37,7 +37,7 @@ var watch_id = null;    // ID of the geolocation
 var tracking_data = []; // Array containing GPS position objects
 
 var publish_text = true;
-var select_activity = [];
+var select_activity = "";
 
 var data_dict = {};
 var addpair = function (my_key, my_value) {
@@ -54,7 +54,7 @@ $("#startTracking_start").live('click', function(){
 
         // (code changed by SHI - 20170515)
         // onSuccess
-        function (position) {
+        function onSuccess(position) {
 
             dataStore = {
                     'timestamp': position.timestamp,
@@ -98,7 +98,7 @@ $("#startTracking_start").live('click', function(){
          */
 
         // Error
-        function (error) {
+        function onError(error) {
             console.log(error);
             $("#position_info").html("error: " + error);
         },
@@ -109,10 +109,16 @@ $("#startTracking_start").live('click', function(){
     // Fill up variables
     track_id = $("#track_id").val();
     try {
-        select_activity = $("#select_activity").val().join(" and ");
+
+        if ($("#select_activity").val() == "Select activity..."){
+            select_activity = "No Activity";
+        }
+        else {
+            select_activity = $("#select_activity").val();
+        }
     }
     catch (err){
-        select_activity.push("No Activity");
+        select_activity = "No Activity";
     }
 
     // Tidy up the UI
@@ -136,14 +142,14 @@ $("#startTracking_stop").live('click', function(){
     // Reset watch_id and tracking_data
     var watch_id = null;
     tracking_data = [];
-    select_activity = [];
+    select_activity = "";
     data_dict = {};
 
     // Tidy up the UI
     $("#track_id").val("").show();
     $("#startTracking_status").html("Stopped tracking workout: <strong>" + track_id + "</strong>");
     $("#select_activity").not(':checked');
-    $("#position_info").html("");
+    $("#position_info").html("").show;
 });
 
 $("#home_clearstorage_button").live('click', function(){
@@ -228,7 +234,7 @@ $('#track_info').live('pageshow', function(){
     final_time_s = Math.round((total_time_s - (final_time_m * 60)) * 100) / 100;
 
     $("#track_info_info").html('Travelled <strong>' + total_km_rounded + ' km </strong> in <strong>' + final_time_m + ' m</strong> and <strong>' + final_time_s + ' s</strong>'
-        + '<br>by ' + ' <strong>' + data[0].activity + '</strong>');
+        + ' by ' + ' <strong>' + data[0].activity + '</strong>');
 
     // Plotting the Route on the Google Map
     // Set the initial Lat and Long of the Google Map
@@ -307,13 +313,22 @@ $("#show_dict").live('click', function(){
         var text = [];
 
         for (var i in localStorage){
-            text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(jQuery.parseJSON(localStorage[i]), null, 2) + "</pre>");
+            try {
+
+                text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(JSON.parse(window.localStorage.getItem(window.localStorage.key(i))), '', 2) + "</pre>");
+                //text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(jQuery.parseJSON(localStorage[i]), '', 2) + "</pre>");
+            }
+            catch (err){
+                console.log('err catch with parcse')
+                text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(localStorage[i], '', 2) + "</pre>");
+            }
+
         }
 
-        $("#position_info").html("<div class='ui-field-contain'><h3>Your Data: </h3><br>"+ text.join("") + "</div>");
+        $("#publish_data").html("<div class='ui-field-contain'><h3>Your Data: </h3><br>"+ text.join("") + "</div>");
     }
     else {
-        $("#position_info").html("");
+        $("#publish_data").html("");
     }
     publish_text = !publish_text;
 });

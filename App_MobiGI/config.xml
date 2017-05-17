@@ -3,7 +3,7 @@
         xmlns="http://www.w3.org/ns/widgets"
         id="com.fhnw.mobigl"
         versionCode = "10"
-        version="17.05.16.beta">
+        version="17.05.18.beta">
 
     <!-- versionCode is optional and Android only -->
 
