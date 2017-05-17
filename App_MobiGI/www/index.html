@@ -11,7 +11,8 @@
          content="default-src * 'unsafe-inline'; media-src *"/>
    -->
     <script type="text/javascript" charset="utf-8" src="js/cordova-1.7.0.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC1bIwmK5EMT38i5e5s44EhGjoLrRB-pAk"></script>
+    <script type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC1bIwmK5EMT38i5e5s44EhGjoLrRB-pAk"></script>
     <!-- <script type="text/javascript" src="js/json2.js"></script> -->
 
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
@@ -60,7 +61,9 @@
     </div>
 
     <div data-role="content">
-        <p>Welcome to the <em>ExerciseTracker</em> app. By clicking <em>Track Workout</em> you can record your workouts using the GPS feature on your phone. Learn how to build this app by reading <em>mobile.tutsplus.com</em>.</p>
+        <p>Welcome to the <em>ExerciseTracker</em> app. By clicking <em>Track Workout</em> you can record your workouts
+            using the GPS feature on your phone. Learn how to build this app by reading <em>mobile.tutsplus.com</em>.
+        </p>
 
         <button id="home_network_button" data-icon="check">Internet Access Enabled</button>
         <button id="home_clearstorage_button">Clear local storage</button>
@@ -90,38 +93,36 @@
 
     <div data-role="content">
         <p id="startTracking_status"></p>
-        <div data-role="content" class="ui-hide-label">
-            <label for="track_id">Track ID/Name:</label>
+        <div data-role="none">
+            <label for="track_id" class="ui-hidden-accessible">Track ID/Name:</label>
             <input type="text" name="track_id" id="track_id" placeholder="Workout ID/Name"/>
-        </div>
-            <div data-role="content" class="ui-hide-label">
-                <label for="select_activity" class="select">Workout type:</label>
-                <select name="select_activity" id="select_activity" multiple="multiple" data-native-menu="false" data-placeholder="true">
-                    <option>Select activity...</option>
-                    <option value="standard" >Standard</option>
-                    <option value="car">Auto</option>
-                    <option value="train">Bahn</option>
-                    <option value="bicycle">Fahrrad</option>
-                    <option value="plain">Flugzeug</option>
-                    <option value="walking">Zu Fuss</option>
-                </select>
-            </div>
+            <p/>
         </div>
 
-    <div data-role="content">
-        <div class="ui-field-contain">
-        <button data-role="button" id="startTracking_start">Start Tracking</button>
-        <button data-role="button" id="startTracking_stop">Stop Tracking</button>
+        <div class="ui-select">
+            <label for="select_activity" class="ui-hidden-accessible">Select Activity</label>
+            <select name="select_activity" id="select_activity" data-native-menu="false" data-placeholder="true">
+                <option>Select activity...</option>
+                <option value="standard">Standard</option>
+                <option value="car">Auto</option>
+                <option value="train">Bahn</option>
+                <option value="bicycle">Fahrrad</option>
+                <option value="plain">Flugzeug</option>
+                <option value="walking">Zu Fuss</option>
+            </select>
+            <p/>
+
         </div>
 
-        <div class="ui-field-contain">
+        <div class="ui-controlgroup">
+            <button data-role="button" id="startTracking_start">Start Tracking</button>
+            <button data-role="button" id="startTracking_stop">Stop Tracking</button>
             <button data-role="button" id="show_dict">Show / Hide Data</button>
         </div>
-    </div>
+        <p/>
 
-    <div data-role="content">
         <p id="startTracking_info"></p>
-        <p data-role="fieldcontain" id="position_info"></p>
+        <p id="position_info"></p>
     </div>
 
 </div><!-- /page -->
