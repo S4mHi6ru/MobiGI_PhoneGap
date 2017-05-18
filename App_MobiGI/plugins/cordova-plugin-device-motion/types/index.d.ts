@@ -32,8 +32,9 @@ interface Accelerometer {
      * @param accelerometerSuccess Success callback that gets the Acceleration object.
      * @param accelerometerError Success callback
      */
-    getCurrentAcceleration(accelerometerSuccess: (acceleration: Acceleration) => void,
-                           accelerometerError: () => void): void;
+    getCurrentAcceleration(
+        accelerometerSuccess: (acceleration: Acceleration) => void,
+        accelerometerError: () => void): void;
     /**
      * Retrieves the device's current Acceleration at a regular interval, executing the
      * accelerometerSuccess callback function each time. Specify the interval in milliseconds
@@ -44,9 +45,10 @@ interface Accelerometer {
      * @param  accelerometerError   Error callback.
      * @param  accelerometerOptions Object with options for watchAcceleration
      */
-    watchAcceleration(accelerometerSuccess: (acceleration: Acceleration) => void,
-                      accelerometerError: () => void,
-                      accelerometerOptions?: AccelerometerOptions): WatchHandle;
+    watchAcceleration(
+        accelerometerSuccess: (acceleration: Acceleration) => void,
+        accelerometerError: () => void,
+        accelerometerOptions?: AccelerometerOptions): WatchHandle;
 }
 
 /**
@@ -72,5 +74,4 @@ interface AccelerometerOptions {
 }
 
 /** Abstract type for watch IDs used by Accelerometer. Values of these type are actually `number` at runtime.*/
-interface WatchHandle {
-}
+interface WatchHandle { }

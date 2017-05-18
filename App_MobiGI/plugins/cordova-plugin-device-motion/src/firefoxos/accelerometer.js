@@ -17,7 +17,7 @@
  * specific language governing permissions and limitations
  * under the License.
  *
- */
+*/
 
 function listener(success, ev) {
     var acc = ev.accelerationIncludingGravity;
@@ -27,7 +27,7 @@ function listener(success, ev) {
 
 var Accelerometer = {
     start: function start(success, error) {
-        return window.addEventListener('devicemotion', function (ev) {
+        return window.addEventListener('devicemotion', function(ev) {
             listener(success, ev);
         }, false);
     },

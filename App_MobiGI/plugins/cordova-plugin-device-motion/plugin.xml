@@ -19,8 +19,8 @@
 -->
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="cordova-plugin-device-motion"
-        version="1.2.5">
+           id="cordova-plugin-device-motion"
+      version="1.2.6-dev">
 
     <name>Device Motion</name>
     <description>Cordova Device Motion Plugin</description>
@@ -30,23 +30,23 @@
     <issue>https://issues.apache.org/jira/browse/CB/component/12320636</issue>
 
     <js-module src="www/Acceleration.js" name="Acceleration">
-        <clobbers target="Acceleration"/>
+        <clobbers target="Acceleration" />
     </js-module>
 
     <js-module src="www/accelerometer.js" name="accelerometer">
-        <clobbers target="navigator.accelerometer"/>
+        <clobbers target="navigator.accelerometer" />
     </js-module>
 
     <!-- firefoxos -->
     <platform name="firefoxos">
         <config-file target="config.xml" parent="/*">
             <feature name="Accelerometer">
-                <param name="firefoxos-package" value="Accelerometer"/>
+                <param name="firefoxos-package" value="Accelerometer" />
             </feature>
         </config-file>
 
         <js-module src="src/firefoxos/accelerometer.js" name="accelerometer-impl">
-            <runs/>
+          <runs />
         </js-module>
     </platform>
 
@@ -59,7 +59,7 @@
             </feature>
         </config-file>
 
-        <source-file src="src/android/AccelListener.java" target-dir="src/org/apache/cordova/devicemotion"/>
+        <source-file src="src/android/AccelListener.java" target-dir="src/org/apache/cordova/devicemotion" />
 
     </platform>
 
@@ -72,14 +72,14 @@
             </feature>
         </config-file>
 
-        <source-file src="src/android/AccelListener.java" target-dir="src/org/apache/cordova/devicemotion"/>
+        <source-file src="src/android/AccelListener.java" target-dir="src/org/apache/cordova/devicemotion" />
 
     </platform>
 
     <!-- ubuntu -->
     <platform name="ubuntu">
-        <header-file src="src/ubuntu/accelerometer.h"/>
-        <source-file src="src/ubuntu/accelerometer.cpp"/>
+        <header-file src="src/ubuntu/accelerometer.h" />
+        <source-file src="src/ubuntu/accelerometer.cpp" />
     </platform>
 
     <!-- ios -->
@@ -91,10 +91,10 @@
             </feature>
         </config-file>
 
-        <header-file src="src/ios/CDVAccelerometer.h"/>
-        <source-file src="src/ios/CDVAccelerometer.m"/>
+        <header-file src="src/ios/CDVAccelerometer.h" />
+        <source-file src="src/ios/CDVAccelerometer.m" />
 
-        <framework src="CoreMotion.framework"/>
+        <framework src="CoreMotion.framework" />
     </platform>
 
     <!-- blackberry10 -->
@@ -102,7 +102,7 @@
         <config-file target="www/config.xml" parent="/widget">
             <feature name="Accelerometer" value="Accelerometer"/>
         </config-file>
-        <source-file src="src/blackberry10/index.js" target-dir="Accelerometer"/>
+        <source-file src="src/blackberry10/index.js" target-dir="Accelerometer" />
     </platform>
 
     <!-- wp7 -->
@@ -114,10 +114,10 @@
         </config-file>
 
         <config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities">
-            <Capability Name="ID_CAP_SENSORS"/>
+            <Capability Name="ID_CAP_SENSORS" />
         </config-file>
 
-        <source-file src="src/wp/Accelerometer.cs"/>
+        <source-file src="src/wp/Accelerometer.cs" />
     </platform>
 
     <!-- wp8 -->
@@ -129,23 +129,23 @@
         </config-file>
 
         <config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities">
-            <Capability Name="ID_CAP_SENSORS"/>
+            <Capability Name="ID_CAP_SENSORS" />
         </config-file>
 
-        <source-file src="src/wp/Accelerometer.cs"/>
+        <source-file src="src/wp/Accelerometer.cs" />
     </platform>
 
     <!-- windows8 -->
     <platform name="windows8">
         <js-module src="src/windows/AccelerometerProxy.js" name="AccelerometerProxy">
-            <runs/>
+            <runs />
         </js-module>
     </platform>
 
     <!-- windows -->
     <platform name="windows">
         <js-module src="src/windows/AccelerometerProxy.js" name="AccelerometerProxy">
-            <runs/>
+            <runs />
         </js-module>
     </platform>
 

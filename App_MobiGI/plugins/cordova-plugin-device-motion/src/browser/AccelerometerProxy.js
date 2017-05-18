@@ -17,7 +17,7 @@
  * specific language governing permissions and limitations
  * under the License.
  *
- */
+*/
 
 
 function listener(success) {
@@ -35,7 +35,7 @@ function listener(success) {
 
 var Accelerometer = {
     start: function start(success, error) {
-        return window.addEventListener('devicemotion', function () {
+        return window.addEventListener('devicemotion', function(){
             listener(success);
         }, false);
     }
