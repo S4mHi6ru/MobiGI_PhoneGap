@@ -271,7 +271,9 @@ $('#track_info').live('pageshow', function () {
 
 // Save File Button
 $("#home_save_file").live('click', function () {
-    window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) {
+
+
+    window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function (dir) {
         console.log("got main dir", dir);
         dir.getFile("myfile.csv", {
             create: true
