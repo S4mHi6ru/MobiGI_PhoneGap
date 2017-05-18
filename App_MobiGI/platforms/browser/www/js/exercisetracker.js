@@ -19,7 +19,11 @@ function gps_distance(lat1, lon1, lat2, lon2){
     return d;
 }
 
-// code from :
+// Device motion (Accelerometer)
+
+
+
+// GeoPosition: code from :
 // https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-geolocation-tracking--mobile-11070
 // https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-persistence-graphing--mobile-11074
 document.addEventListener("deviceready", function(){
@@ -36,7 +40,8 @@ var track_id = '';      // Name/ID of the exercise
 var watch_id = null;    // ID of the geolocation
 var tracking_data = []; // Array containing GPS position objects
 
-var select_activity = [];
+var publish_text = true;
+var select_activity = "";
 
 var data_dict = {};
 var addpair = function (my_key, my_value) {
@@ -57,7 +62,7 @@ $("#startTracking_start").live('click', function(){
 
             dataStore = {
                     'timestamp': position.timestamp,
-                'activity': select_activity.join(" and "),
+                'activity': select_activity,
                     'coords': {
                         'accuracy': position.coords.accuracy,
                         'altitude': position.coords.altitude,
@@ -83,7 +88,7 @@ $("#startTracking_start").live('click', function(){
             var lng = position.coords.longitude;
             $("#position_info").html("Your current Position is: " + "<br>" + "lat : " + lat + " lng : " + lng);
 
-            //addpair(track_id, "[" + tracking_data + "]");
+            // Store Data to dict
             addpair(track_id, JSON.stringify(tracking_data));
             console.log("dict: " + data_dict);
         },
@@ -107,11 +112,23 @@ $("#startTracking_start").live('click', function(){
 
     // Fill up variables
     track_id = $("#track_id").val();
-    select_activity = $("#select_activity").val();
+    try {
+
+        if ($("#select_activity").val() == "Select activity..."){
+            select_activity = "No Activity";
+        }
+        else {
+            select_activity = $("#select_activity").val();
+        }
+    }
+    catch (err){
+        select_activity = "No Activity";
+    }
 
     // Tidy up the UI
     $("#track_id").hide();
     $("#startTracking_status").html("Tracking workout: <strong>" + track_id + "</strong>");
+    $("#position_info").hide();
 });
 
 $("#startTracking_stop").live('click', function(){
@@ -129,14 +146,14 @@ $("#startTracking_stop").live('click', function(){
     // Reset watch_id and tracking_data
     var watch_id = null;
     tracking_data = [];
-    select_activity = [];
+    select_activity = "";
     data_dict = {};
 
     // Tidy up the UI
     $("#track_id").val("").show();
     $("#startTracking_status").html("Stopped tracking workout: <strong>" + track_id + "</strong>");
     $("#select_activity").not(':checked');
-    $("#position_info").html("");
+    $("#position_info").html("").show;
 });
 
 $("#home_clearstorage_button").live('click', function(){
@@ -199,7 +216,7 @@ $('#track_info').live('pageshow', function(){
 
     // Calculate the total distance travelled
     total_km = 0;
-    console.log("length: " + data.length);
+    //console.log("length: " + data.length);
     for(i=0; i<data.length; i++){
 
         if(i == (data.length-1)){
@@ -221,7 +238,7 @@ $('#track_info').live('pageshow', function(){
     final_time_s = Math.round((total_time_s - (final_time_m * 60)) * 100) / 100;
 
     $("#track_info_info").html('Travelled <strong>' + total_km_rounded + ' km </strong> in <strong>' + final_time_m + ' m</strong> and <strong>' + final_time_s + ' s</strong>'
-        + '<br>by ' + ' <strong>' + data[0].activity + '</strong>');
+        + ' by ' + ' <strong>' + data[0].activity + '</strong>');
 
     // Plotting the Route on the Google Map
     // Set the initial Lat and Long of the Google Map
@@ -288,9 +305,34 @@ $("#home_save_file").live('click', function(){
     }
 });
 
+// Show stored data in a app view
 $("#show_dict").live('click', function(){
-    console.log('---------- START: Show Data ----------');
-    console.log(data_dict);
-    console.log(window.localStorage);
-    console.log('---------- STOP: Show Data ----------');
+
+    if (publish_text == true){
+        console.log('---------- START: Show Data ----------');
+        console.log(data_dict);
+        console.log(window.localStorage);
+        console.log('---------- STOP: Show Data ----------');
+
+        var text = [];
+
+        for (var i in localStorage){
+            try {
+
+                text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(JSON.parse(window.localStorage.getItem(window.localStorage.key(i))), '', 2) + "</pre>");
+                //text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(jQuery.parseJSON(localStorage[i]), '', 2) + "</pre>");
+            }
+            catch (err){
+                console.log('err catch with parcse')
+                text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(localStorage[i], '', 2) + "</pre>");
+            }
+
+        }
+
+        $("#publish_data").html("<div class='ui-field-contain'><h3>Your Data: </h3><br>"+ text.join("") + "</div>");
+    }
+    else {
+        $("#publish_data").html("");
+    }
+    publish_text = !publish_text;
 });

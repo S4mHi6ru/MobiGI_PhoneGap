@@ -19,7 +19,11 @@ function gps_distance(lat1, lon1, lat2, lon2){
     return d;
 }
 
-// code from :
+// Device motion (Accelerometer)
+
+
+
+// GeoPosition: code from :
 // https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-geolocation-tracking--mobile-11070
 // https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-persistence-graphing--mobile-11074
 document.addEventListener("deviceready", function(){
@@ -84,7 +88,7 @@ $("#startTracking_start").live('click', function(){
             var lng = position.coords.longitude;
             $("#position_info").html("Your current Position is: " + "<br>" + "lat : " + lat + " lng : " + lng);
 
-            //addpair(track_id, "[" + tracking_data + "]");
+            // Store Data to dict
             addpair(track_id, JSON.stringify(tracking_data));
             console.log("dict: " + data_dict);
         },
@@ -212,7 +216,7 @@ $('#track_info').live('pageshow', function(){
 
     // Calculate the total distance travelled
     total_km = 0;
-    console.log("length: " + data.length);
+    //console.log("length: " + data.length);
     for(i=0; i<data.length; i++){
 
         if(i == (data.length-1)){

@@ -10,6 +10,7 @@
    <meta http-equiv="Content-Security-Policy"
          content="default-src * 'unsafe-inline'; media-src *"/>
    -->
+
     <script type="text/javascript" charset="utf-8" src="js/cordova-1.7.0.js"></script>
     <script type="text/javascript"
             src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC1bIwmK5EMT38i5e5s44EhGjoLrRB-pAk"></script>
@@ -40,6 +41,12 @@
     -->
 
     <!-- google API: AIzaSyC1yNh4zQiofYxuY1NF6BnNAEI1Fp_1WD0 -->
+
+    <style>
+        .ui-page {
+            background:#ffffff;
+        }
+    </style>
 
 </head>
 <body>
@@ -169,7 +176,7 @@
     <div data-role="content">
         <p id="track_info_info"></p>
 
-        <div id="map_canvas" style="position:relative;bottom:0;left:0;width:100%;height:300px;"></div>
+        <div id="map_canvas" style="position:relativ;bottom:0;left:0;width:100%;height:calc(100vh - 6em - 6em);"></div>
 
     </div>
 
