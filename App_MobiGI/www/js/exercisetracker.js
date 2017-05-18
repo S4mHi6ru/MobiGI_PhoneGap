@@ -20,7 +20,8 @@ function gps_distance(lat1, lon1, lat2, lon2) {
 }
 
 
-// GeoPosition: code from :
+// GeoPosition
+// some code from:
 // https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-geolocation-tracking--mobile-11070
 // https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-persistence-graphing--mobile-11074
 document.addEventListener("deviceready",
@@ -35,7 +36,7 @@ document.addEventListener("deviceready",
                 .button('refresh');
         }
     }
-);
+)
 
 
 
@@ -83,13 +84,8 @@ $("#startTracking_start").live('click', function () {
             console.log("Store json: " + JSON.stringify(dataStore));
 
             tracking_data.push(dataStore);
-            //tracking_data.push(JSON.stringify(dataStore));
-            // tracking_data.push(position);
-            //tracking_data.push(dataStore);
-            console.log("array :" + tracking_data);
-            console.log("json fake: " + "'[" + tracking_data + "]'");
-            //console.log(tracking_data + "tracking data")
-            //console.log(JSON.stringify(position))
+
+            // get coords to publish
             var lat = position.coords.latitude;
             var lng = position.coords.longitude;
             $("#position_info").html("Your current Position is: " + "<br>" + "lat : " + lat + " lng : " + lng);
@@ -99,6 +95,7 @@ $("#startTracking_start").live('click', function () {
             console.log("dict: " + data_dict);
         },
         /*
+         // origial function replaced
          function(position){
          tracking_data.push(position);
          var lat = position.coords.latitude;
@@ -110,11 +107,11 @@ $("#startTracking_start").live('click', function () {
         // Error
         function onError(error) {
             console.log(error);
-            $("#position_info").html("error: " + error);
+            alert("error starttracking: " + error);
         },
 
         // Settings
-        {frequency: 3000, enableHighAccuracy: true});
+        {frequency: 2000, enableHighAccuracy: true});
 
     // Fill up variables
     track_id = $("#track_id").val();
@@ -140,15 +137,10 @@ $("#startTracking_start").live('click', function () {
 $("#startTracking_stop").live('click', function () {
     // Stop tracking the user
     navigator.geolocation.clearWatch(watch_id);
-    navigator.accelerometer.clearWatch(watchID);
 
     // Save the tracking data (code changed by SHI - 20170515)
-
     window.localStorage.setItem(track_id, data_dict[track_id]);
     //window.localStorage.setItem(track_id, JSON.stringify(tracking_data));
-
-    console.log("file: " + JSON.stringify(tracking_data));
-    //alert("write data " + JSON.stringify(tracking_data));
 
     // Reset watch_id and tracking_data
     var watch_id = null;
@@ -205,19 +197,17 @@ $('#track_info').live('pageshow', function () {
 
     // Get all the GPS data for the specific workout
     var data = window.localStorage.getItem(key);
-    console.log("loaded data " + data);
-    // Turn the stringified GPS data back into a JS object
+    //console.log("loaded data " + data);
 
+    // Turn the stringified GPS data back into a JS object
     try {
         data = JSON.parse(data);
-        console.log(data);
+        //console.log(data);
     }
     catch (err) {
         console.log("parse err:" + err)
-        //alert("JSON read" + err)
         data = JSON.parse(givevalue(track_id));
-        alert("data from var: " + data);
-        //data = [{"timestamp": 1494366039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53343424644297, "longitude": 7.647811924831444}},{"timestamp": 1494376039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53320514562638, "longitude": 7.647614359555965}}]
+        alert("parsed data from var instead of json: " + err);
     }
 
 
@@ -333,7 +323,6 @@ $("#show_dict").live('click', function () {
                 console.log('err catch with parcse')
                 text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(localStorage[i], '', 2) + "</pre>");
             }
-
         }
 
         $("#publish_data").html("<div class='ui-field-contain'><h3>Your Data: </h3><br>" + text.join("") + "</div>");
