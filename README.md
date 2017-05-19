@@ -1,7 +1,7 @@
 # MobiGI_PhoneGap
 FHNW MSE Kurzprojekt
 
-### BS / Sensordaten: PhoneGap LBS App zur Sammlung und Annotation von Sensordaten 
+### LBS / Sensordaten: PhoneGap LBS App zur Sammlung und Annotation von Sensordaten 
 Mit der in der LBS Vorlesung vorgestellten Entwicklungsumgebung PhoneGap soll eine App erstellt werden,
         die Sensordaten des mobilen Gerätes (wie GPS, Schrittzähler, Accelerometer) als Service im Hintergrund 
         (mit Focus auf Android) sammelt und dem Benutzer ermöglicht die Aktivitäten wie zum Beispiel Gehen, Arbeiten,
