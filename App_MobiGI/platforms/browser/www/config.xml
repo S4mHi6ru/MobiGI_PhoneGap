@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.fhnw.mobigl" version="17.05.18.beta" versionCode="10" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <feature name="Camera">
+        <param name="browser-package" value="Camera" />
+    </feature>
+    <feature name="Device">
+        <param name="browser-package" value="Device" />
+    </feature>
+    <name>MobiGI</name>
+    <description>
+        LBS / Sensordaten: PhoneGap LBS App zur Sammlung und Annotation von Sensordaten
+    </description>
+    <author email="support@phonegap.com" href="http://phonegap.com">
+        FHNW-Students: S. Hirsbrunner und C. Zbinden
+    </author>
+    <content src="index.html" />
+    <icon src="img/icon.png" />
+    <splash src="img/splash.png" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="android-minSdkVersion" value="14" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+    <preference name="orientation" value="portrait" />
+</widget>
