@@ -18,4 +18,5 @@ Support for Android Phones only.
 
 ### Code Reference:
 https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-geolocation-tracking--mobile-11070
+
 https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-persistence-graphing--mobile-11074
