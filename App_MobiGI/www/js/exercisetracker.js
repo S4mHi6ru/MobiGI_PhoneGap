@@ -213,7 +213,6 @@ $('#track_info').live('pageshow', function () {
         alert("parsed data from var instead of json: " + err);
     }
 
-
     // Calculate the total distance travelled
     total_km = 0;
     //console.log("length: " + data.length);
