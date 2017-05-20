@@ -19,6 +19,13 @@ function gps_distance(lat1, lon1, lat2, lon2) {
     return d;
 }
 
+// Accelerometer (Device motion)
+// code:  https://github.com/apache/cordova-plugin-device-motion
+// could not be implemented
+
+// Pedometer
+// code from: https://github.com/leecrossley/cordova-plugin-pedometer
+// not implemented due tue it is based on the accelerometer plugin
 
 // GeoPosition
 // some code from:
@@ -36,12 +43,9 @@ document.addEventListener("deviceready",
                 .button('refresh');
         }
     }
-)
+);
 
-
-
-
-// hit start button
+// Define variables
 var track_id = '';      // Name/ID of the exercise
 var watch_id = null;    // ID of the geolocation
 var tracking_data = []; // Array containing GPS position objects
@@ -52,16 +56,15 @@ var select_activity = "";
 var data_dict = {};
 var addpair = function (my_key, my_value) {
     data_dict[my_key] = my_value;
-}
+};
 var givevalue = function (my_key) {
     return data_dict[my_key];
-}
+};
 
-
+// Hit start button
 $("#startTracking_start").live('click', function () {
 
     // Start tracking Position
-
     watch_id = navigator.geolocation.watchPosition(
         // (code changed by SHI - 20170515)
         // onSuccess
@@ -78,7 +81,7 @@ $("#startTracking_start").live('click', function () {
                     'latitude': position.coords.latitude,
                     'longitude': position.coords.longitude,
                     'speed': position.coords.speed
-                },
+                }
             };
 
             console.log("Store json: " + JSON.stringify(dataStore));
@@ -152,7 +155,7 @@ $("#startTracking_stop").live('click', function () {
     $("#track_id").val("").show();
     $("#startTracking_status").html("Stopped tracking workout: <strong>" + track_id + "</strong>");
     $("#select_activity").not(':checked');
-    $("#position_info").html("").show;
+    $("#position_info").html("").show();
 });
 
 $("#home_clearstorage_button").live('click', function () {
@@ -161,7 +164,7 @@ $("#home_clearstorage_button").live('click', function () {
 
 $("#home_seedgps_button").live('click', function () {
     window.localStorage.setItem('Sample block', '[{"timestamp":1335700802000,"coords":{"heading":null,"altitude":null,"longitude":170.33488333333335,"accuracy":0,"latitude":-45.87475166666666,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700803000,"coords":{"heading":null,"altitude":null,"longitude":170.33481666666665,"accuracy":0,"latitude":-45.87465,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700804000,"coords":{"heading":null,"altitude":null,"longitude":170.33426999999998,"accuracy":0,"latitude":-45.873708333333326,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700805000,"coords":{"heading":null,"altitude":null,"longitude":170.33318333333335,"accuracy":0,"latitude":-45.87178333333333,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700806000,"coords":{"heading":null,"altitude":null,"longitude":170.33416166666666,"accuracy":0,"latitude":-45.871478333333336,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700807000,"coords":{"heading":null,"altitude":null,"longitude":170.33526833333332,"accuracy":0,"latitude":-45.873394999999995,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700808000,"coords":{"heading":null,"altitude":null,"longitude":170.33427333333336,"accuracy":0,"latitude":-45.873711666666665,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700809000,"coords":{"heading":null,"altitude":null,"longitude":170.33488333333335,"accuracy":0,"latitude":-45.87475166666666,"speed":null,"altitudeAccuracy":null}}]');
-    window.localStorage.setItem('Sample Muttenz', '[{"timestamp": 1494366039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53343424644297, "longitude": 7.647811924831444}},{"timestamp": 1494376039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53320514562638, "longitude": 7.647614359555965}},{"timestamp": 1494386039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53299336200655, "longitude": 7.647445342000614}},{"timestamp": 1494396039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53314657284183, "longitude": 7.646490248556102}},{"timestamp": 1494406039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53367138793076, "longitude": 7.643951310510298}},{"timestamp": 1494416039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53406042600069, "longitude": 7.642599268547949}},{"timestamp": 1494426039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53397150778124, "longitude": 7.642489930718918}},{"timestamp": 1494436039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53392032330245, "longitude": 7.642182859385558}},{"timestamp": 1494446039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53402336934874, "longitude": 7.64126753261418}},{"timestamp": 1494456039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53435210076379, "longitude": 7.639281311688029}},{"timestamp": 1494466039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53416699067378, "longitude": 7.639221464495107}},{"timestamp": 1494476039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53412290498257, "longitude": 7.638953991973576}},{"timestamp": 1494486039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53351401829625, "longitude": 7.638747717871397}},{"timestamp": 1494496039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.5335293159634, "longitude": 7.638640434117157}},{"timestamp": 1494506039, "coords": {"altitude": null, "speed": null, "altitudeAccuracy": null, "accuracy": 0, "heading": null, "latitude": 47.53365059205396, "longitude": 7.638598149881323}}]');
+    window.localStorage.setItem('Sample Muttenz', '[{"timestamp":1494366039,"activity":"walking","coords":{"altitude":null,"speed":null,"altitudeAccuracy":null,"accuracy":0,"heading":null,"latitude":47.53343424644297,"longitude":7.647811924831444}},{"timestamp":1494376039,"activity":"walking","coords":{"altitude":null,"speed":null,"altitudeAccuracy":null,"accuracy":0,"heading":null,"latitude":47.53320514562638,"longitude":7.647614359555965}},{"timestamp":1494386039,"activity":"walking","coords":{"altitude":null,"speed":null,"altitudeAccuracy":null,"accuracy":0,"heading":null,"latitude":47.53299336200655,"longitude":7.647445342000614}},{"timestamp":1494396039,"activity":"walking","coords":{"altitude":null,"speed":null,"altitudeAccuracy":null,"accuracy":0,"heading":null,"latitude":47.53314657284183,"longitude":7.646490248556102}},{"timestamp":1494406039,"activity":"walking","coords":{"altitude":null,"speed":null,"altitudeAccuracy":null,"accuracy":0,"heading":null,"latitude":47.53367138793076,"longitude":7.643951310510298}},{"timestamp":1494416039,"activity":"walking","coords":{"altitude":null,"speed":null,"altitudeAccuracy":null,"accuracy":0,"heading":null,"latitude":47.53406042600069,"longitude":7.642599268547949}},{"timestamp":1494426039,"activity":"walking","coords":{"altitude":null,"speed":null,"altitudeAccuracy":null,"accuracy":0,"heading":null,"latitude":47.53397150778124,"longitude":7.642489930718918}},{"timestamp":1494436039,"activity":"walking","coords":{"altitude":null,"speed":null,"altitudeAccuracy":null,"accuracy":0,"heading":null,"latitude":47.53392032330245,"longitude":7.642182859385558}},{"timestamp":1494446039,"activity":"walking","coords":{"altitude":null,"speed":null,"altitudeAccuracy":null,"accuracy":0,"heading":null,"latitude":47.53402336934874,"longitude":7.64126753261418}},{"timestamp":1494456039,"activity":"walking","coords":{"altitude":null,"speed":null,"altitudeAccuracy":null,"accuracy":0,"heading":null,"latitude":47.53435210076379,"longitude":7.639281311688029}},{"timestamp":1494466039,"activity":"walking","coords":{"altitude":null,"speed":null,"altitudeAccuracy":null,"accuracy":0,"heading":null,"latitude":47.53416699067378,"longitude":7.639221464495107}},{"timestamp":1494476039,"activity":"walking","coords":{"altitude":null,"speed":null,"altitudeAccuracy":null,"accuracy":0,"heading":null,"latitude":47.53412290498257,"longitude":7.638953991973576}},{"timestamp":1494486039,"activity":"walking","coords":{"altitude":null,"speed":null,"altitudeAccuracy":null,"accuracy":0,"heading":null,"latitude":47.53351401829625,"longitude":7.638747717871397}},{"timestamp":1494496039,"activity":"walking","coords":{"altitude":null,"speed":null,"altitudeAccuracy":null,"accuracy":0,"heading":null,"latitude":47.5335293159634,"longitude":7.638640434117157}},{"timestamp":1494506039,"activity":"walking","coords":{"altitude":null,"speed":null,"altitudeAccuracy":null,"accuracy":0,"heading":null,"latitude":47.53365059205396,"longitude":7.638598149881323}}]');
 });
 
 // When the user views the history page
@@ -205,7 +208,7 @@ $('#track_info').live('pageshow', function () {
         //console.log(data);
     }
     catch (err) {
-        console.log("parse err:" + err)
+        console.log("parse err:" + err);
         data = JSON.parse(givevalue(track_id));
         alert("parsed data from var instead of json: " + err);
     }
@@ -216,7 +219,7 @@ $('#track_info').live('pageshow', function () {
     //console.log("length: " + data.length);
     for (i = 0; i < data.length; i++) {
 
-        if (i == (data.length - 1)) {
+        if (i === (data.length - 1)) {
             break;
         }
         total_km += gps_distance(data[i].coords.latitude, data[i].coords.longitude, data[i + 1].coords.latitude, data[i + 1].coords.longitude);
@@ -269,63 +272,41 @@ $('#track_info').live('pageshow', function () {
     trackPath.setMap(map);
 });
 
-// Save File Button
-$("#home_save_file").live('click', function () {
+// create preformated text of json data
+function create_text() {
+    var text = [];
 
-
-    window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function (dir) {
-        console.log("got main dir", dir);
-        dir.getFile("myfile.csv", {
-            create: true
-        }, function (file) {
-            console.log("got the file", file);
-            logOb = file;
-            var csv = "";
-            //we should have the same amount of name/cookie fields
-            var name = "testdata1";
-            var cookies = "testdata2",
-                csv = csv + "" + name + "," + cookies + "\n";
-            console.log("csv-" + csv);
-            writeLog(csv);
-        });
-    });
-
-    function writeLog(str) {
-        if (!logOb) return;
-        logOb.createWriter(function (fileWriter) {
-            fileWriter.seek(fileWriter.length);
-
-            var blob = new Blob([str], {
-                type: 'text/plain'
-            });
-            fileWriter.write(blob);
-            console.log("ok, in theory i worked");
-        }, fail);
+    for (var i in localStorage) {
+        /*
+        // Different json parse code for same result --> choose shorter one
+        try {
+            console.log("JSON parse try 1");
+            text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(JSON.parse(window.localStorage.getItem(window.localStorage.key(i))), null, 2) + "</pre>");
+        }
+        catch (err){
+            console.log('err with parse JSON 1');
+        }*/
+        try {
+            console.log("JSON parse try 2");
+            text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(JSON.parse(localStorage[i]), null, 2) + "</pre>");
+        }
+        catch (err) {
+            console.log('err with parse JSON 2');
+            text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(localStorage[i], null, 2) + "</pre>");
+        }
     }
-});
+    return text;
+}
 
 // Show stored data in a app view
 $("#show_dict").live('click', function () {
 
-    if (publish_text == true) {
+    if (publish_text === true) {
         console.log('---------- START: Show Data ----------');
-        console.log(data_dict);
         console.log(window.localStorage);
         console.log('---------- STOP: Show Data ----------');
 
-        var text = [];
-
-        for (var i in localStorage) {
-            try {
-
-                text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(JSON.parse(window.localStorage.getItem(window.localStorage.key(i))), '', 2) + "</pre>");
-                //text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(jQuery.parseJSON(localStorage[i]), '', 2) + "</pre>");
-            }
-            catch (err) {
-                console.log('err catch with parcse')
-                text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(localStorage[i], '', 2) + "</pre>");
-            }
-        }
+        var text = create_text();
 
         $("#publish_data").html("<div class='ui-field-contain'><h3>Your Data: </h3><br>" + text.join("") + "</div>");
     }
