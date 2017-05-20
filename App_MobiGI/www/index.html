@@ -6,15 +6,10 @@
     <meta name="msapplication-tap-highlight" content="no"/>
     <meta name="viewport"
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"/>
-    <!--
-   <meta http-equiv="Content-Security-Policy"
-         content="default-src * 'unsafe-inline'; media-src *"/>
-   -->
 
     <script type="text/javascript" charset="utf-8" src="js/cordova-1.7.0.js"></script>
     <script type="text/javascript"
             src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC1bIwmK5EMT38i5e5s44EhGjoLrRB-pAk"></script>
-    <!-- <script type="text/javascript" src="js/json2.js"></script> -->
 
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.1.0.min.js"></script>
@@ -22,26 +17,8 @@
     <link rel="stylesheet" href="css/jquery.mobile-1.1.0.min.css"/>
     <link rel="icon" type="image/png" href="img/icon.png">
 
-
     <script type="text/javascript" src="js/exercisetracker.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
-    <!--
-    <script type="text/javascript" charset="utf-8">
-        // Call onDeviceReady when Cordova is loaded.
-        function  onLoad() {
-            document.addEventListener("deviceready", onDeviceReady, false);
-        }
-        // Cordova is loaded and it is now safe to make calls Cordova methods
-        function onDeviceReady() {
-            // Now safe to use de Cordova API
-            alert('code: 4');
-            var options = { frequency: 3000 };
-            watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
-        }
-    </script>
-    -->
-
-    <!-- google API: AIzaSyC1yNh4zQiofYxuY1NF6BnNAEI1Fp_1WD0 -->
 
     <style>
         .ui-page {
@@ -69,18 +46,14 @@
     </div>
 
     <div data-role="content">
-        <p>Welcome to the <em>ExerciseTracker</em> app. By clicking <em>Track Workout</em> you can record your workouts
-            using the GPS feature on your phone. Learn how to build this app by reading <em>mobile.tutsplus.com</em>.
+        <p> <strong>LBS / Sensordaten: PhoneGap LBS App zur Sammlung und Annotation von Sensordaten.</strong><br>
+            Welcome to the <em>ExerciseTracker</em> app. By clicking <em>Track Workout</em> you can record your workouts
+            using the GPS feature on your phone.
         </p>
 
         <button id="home_network_button" data-icon="check">Internet Access Enabled</button>
         <button id="home_clearstorage_button">Clear local storage</button>
         <button id="home_seedgps_button">Load Seed GPS Data</button>
-    </div>
-    <div data-role="content">
-        <button id="home_save_file">Export Data</button>
-        <button id="actionOne">Action One</button>
-        <button id="actionTwo">Action Two</button>
     </div>
 
 </div>
@@ -179,7 +152,7 @@
     <div data-role="content">
         <p id="track_info_info"></p>
 
-        <div id="map_canvas" style="position:relativ;bottom:0;left:0;width:100%;height:calc(100vh - 6em - 6em);"></div>
+        <div id="map_canvas" style="position:relative;bottom:0;left:0;width:100%;height:calc(100vh - 6em - 5em);"></div>
 
     </div>
 

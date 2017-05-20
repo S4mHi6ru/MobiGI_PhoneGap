@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.fhnw.mobigl" version="17.05.18.beta" versionCode="10" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.fhnw.mobigl" version="17.05.18.beta" versionCode="10" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:apache="http://apache.org/cordova/ns/plugins/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
     <feature name="Camera">
         <param name="browser-package" value="Camera" />
     </feature>
@@ -14,6 +14,8 @@
         FHNW-Students: S. Hirsbrunner und C. Zbinden
     </author>
     <content src="index.html" />
+    <gap:plugin name="this-npm-plugin" source="npm" version="1.0.0" />
+    <gap:plugin name="cordova-plugin-email-composer" source="npm" version="0.8.3" />
     <icon src="img/icon.png" />
     <splash src="img/splash.png" />
     <access origin="*" />
@@ -23,8 +25,13 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <config-file parent="/*" target="res/xml/config.xml">
+    </config-file>
+    <js-module name="EmailComposerProxy" src="src/browser/EmailComposerProxy.js">
+        <runs />
+    </js-module>
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
-    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <preference name="orientation" value="portrait" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
 </widget>
