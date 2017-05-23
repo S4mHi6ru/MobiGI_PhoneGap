@@ -134,7 +134,6 @@ $("#startTracking_start").live('click', function () {
     // Tidy up the UI
     $("#track_id").hide();
     $("#startTracking_status").html("Tracking workout: <strong>" + track_id + "</strong>");
-    $("#position_info").hide();
 });
 
 $("#startTracking_stop").live('click', function () {
@@ -155,7 +154,8 @@ $("#startTracking_stop").live('click', function () {
     $("#track_id").val("").show();
     $("#startTracking_status").html("Stopped tracking workout: <strong>" + track_id + "</strong>");
     $("#select_activity").not(':checked');
-    $("#position_info").html("").show();
+    $("#position_info").hide();
+    //$("#position_info").html("").show();
 });
 
 $("#home_clearstorage_button").live('click', function () {

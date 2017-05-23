@@ -27,7 +27,6 @@ function gps_distance(lat1, lon1, lat2, lon2) {
 // code from: https://github.com/leecrossley/cordova-plugin-pedometer
 // not implemented due tue it is based on the accelerometer plugin
 
-
 // GeoPosition
 // some code from:
 // https://code.tutsplus.com/tutorials/build-an-exercise-tracking-app-geolocation-tracking--mobile-11070
@@ -156,7 +155,7 @@ $("#startTracking_stop").live('click', function () {
     $("#track_id").val("").show();
     $("#startTracking_status").html("Stopped tracking workout: <strong>" + track_id + "</strong>");
     $("#select_activity").not(':checked');
-    $("#position_info").html("").show;
+    $("#position_info").html("").show();
 });
 
 $("#home_clearstorage_button").live('click', function () {
@@ -213,7 +212,6 @@ $('#track_info').live('pageshow', function () {
         data = JSON.parse(givevalue(track_id));
         alert("parsed data from var instead of json: " + err);
     }
-
 
     // Calculate the total distance travelled
     total_km = 0;
@@ -273,96 +271,37 @@ $('#track_info').live('pageshow', function () {
     trackPath.setMap(map);
 });
 
-// create preformated test from datastore
+// create preformated text of json data
 function create_text() {
     var text = [];
 
     for (var i in localStorage) {
+        /*
+        // Different json parse code for same result --> choose shorter one
         try {
             console.log("JSON parse try 1");
-            text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(JSON.parse(window.localStorage.getItem(window.localStorage.key(i))), ' ', 2) + "</pre>");
-            //text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(jQuery.parseJSON(localStorage[i]), '', 2) + "</pre>");
+            text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(JSON.parse(window.localStorage.getItem(window.localStorage.key(i))), null, 2) + "</pre>");
         }
         catch (err){
-            console.log('err with parse JSON 2');
-        }
+            console.log('err with parse JSON 1');
+        }*/
         try {
             console.log("JSON parse try 2");
-            text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(JSON.parse(localStorage[i]), '', 2) + "</pre>");
+            text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(JSON.parse(localStorage[i]), null, 2) + "</pre>");
         }
         catch (err) {
             console.log('err with parse JSON 2');
-            text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(localStorage[i], '', 2) + "</pre>");
+            text.push("<h4>" + i + "</h4>" + "<pre>" + JSON.stringify(localStorage[i], null, 2) + "</pre>");
         }
     }
     return text;
 }
-
-// Save File Button - Data export --> send data
-$("#home_save_file").live('click', function () {
-
-    document.addEventListener('deviceready', function () {
-        // cordova.plugins.email is now available
-
-    }, false);
-
-    console.log('---------- START: Mail ----------');
-
-    var text = create_text();
-    cordova.plugins.email.open({
-        app: 'mailto',
-        subject: 'Sent with mailto'
-    });
-    cordova.plugins.email.open({
-        //to:      'max@mustermann.de',
-        //cc:      'erika@mustermann.de',
-        //bcc:     ['john@doe.com', 'jane@doe.com'],
-        subject: 'Data from FHNW Tracker',
-        body:    text.join("")
-    });
-
-    console.log('---------- STOP: Mail ----------');
-
-
-    /*
-    window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function (dir) {
-        console.log("got main dir", dir);
-        dir.getFile("myfile.csv", {
-            create: true
-        }, function (file) {
-            console.log("got the file", file);
-            logOb = file;
-            var csv = "";
-            //we should have the same amount of name/cookie fields
-            var name = "testdata1";
-            var cookies = "testdata2",
-                csv = csv + "" + name + "," + cookies + "\n";
-            console.log("csv-" + csv);
-            writeLog(csv);
-        });
-    });
-
-    function writeLog(str) {
-        if (!logOb) return;
-        logOb.createWriter(function (fileWriter) {
-            fileWriter.seek(fileWriter.length);
-
-            var blob = new Blob([str], {
-                type: 'text/plain'
-            });
-            fileWriter.write(blob);
-            console.log("ok, in theory i worked");
-        }, fail);
-    }
-    */
-});
 
 // Show stored data in a app view
 $("#show_dict").live('click', function () {
 
     if (publish_text === true) {
         console.log('---------- START: Show Data ----------');
-        console.log(data_dict);
         console.log(window.localStorage);
         console.log('---------- STOP: Show Data ----------');
 
