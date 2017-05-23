@@ -2,7 +2,7 @@
 <widget xmlns="http://www.w3.org/ns/widgets"
         id="com.phonegab.mobigl"
         versionCode = "10"
-        version="17.05.20.beta">
+        version="17.05.23.beta">
 
     <!-- versionCode is optional and Android only -->
 
