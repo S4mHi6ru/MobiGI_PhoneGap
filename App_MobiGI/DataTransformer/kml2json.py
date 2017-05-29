@@ -16,10 +16,10 @@ from pprint import pprint
 # Return a list of all Polygon for each Kreis
 coord = {}
 kNrList = []
-with open('Pfad.kml', 'r') as f:
+with open('Path.kml', 'r') as f:
     tree = ET.parse(f)
     root = tree.getroot()
-    coords = root[0][4][2][1].text
+    coords = root[0][2][2][1].text
     coordslist = coords.split()
     #print(root[0][4][2][1].text)
     #print(coordslist[0])
@@ -42,6 +42,7 @@ with open('Pfad.kml', 'r') as f:
         #json_str = json.dumps(data)
         #print(json_str)
         d = json.dumps({'timestamp': timestamp,
+                        'activity': "bicycle",
                         'coords': {'accuracy': 0,
                                    'altitude': None,
                                    'altitudeAccuracy': None,
